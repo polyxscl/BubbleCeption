@@ -13,7 +13,7 @@ AssetManager::AssetManager() {
 		throw std::runtime_error("DuplicateAssetManager");
 	}
 
-	logger << "Initializing AssetManager..." << logger.info;
+	logger << "Creating AssetManager class..." << logger.info;
 
 	// Singleton
 	instance = this;

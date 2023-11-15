@@ -63,6 +63,10 @@ IAssetManager& Game::getIAssetManager() {
 	return asset_manager;
 }
 
+IInputManager& Game::getIInputManager() {
+	return input_manager;
+}
+
 void Game::checkInit() {
 	if (!instance) {
 		logger << "Game instance not initialized" << logger.error;
