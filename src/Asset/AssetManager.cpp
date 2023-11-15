@@ -32,6 +32,22 @@ void AssetManager::loadAssets(const fs::path& directory) {
 				fs::path path = entry.path();
 				std::string ext = path.extension().string();
 				std::string id = path.stem().string();
+
+				++count;
+
+				// Material data
+				if (ext == ".mtl") {
+					materials.emplace(id, std::make_shared<MaterialAsset>(id, path));
+				}
+				// Wavefront OBJ data
+				else if (ext == ".obj") {
+					objs.emplace(id, std::make_shared<OBJAsset>(id, path));
+				}
+				// Image data
+				else if (FreeImage_GetFileType(path.string().c_str(), 0) != FREE_IMAGE_FORMAT::FIF_UNKNOWN) {
+					images.emplace(id, std::make_shared<ImageAsset>(id, path));
+				}
+				else --count;
 			}
 		}
 		else {
@@ -45,6 +61,18 @@ void AssetManager::loadAssets(const fs::path& directory) {
 		logger << "Image assets might not have been loaded properly!" << logger.error;
 	}
 	logger << "Found " << count << " assets." << logger.info;
+}
+
+std::shared_ptr<ImageAsset> AssetManager::getImageAsset(std::string id) {
+	return (images.find(id) != images.end()) ? images[id] : nullptr;
+}
+
+std::shared_ptr<MaterialAsset> AssetManager::getMaterialAsset(std::string id) {
+	return (materials.find(id) != materials.end()) ? materials[id] : nullptr;
+}
+
+std::shared_ptr<OBJAsset> AssetManager::getOBJAsset(std::string id) {
+	return (objs.find(id) != objs.end()) ? objs[id] : nullptr;
 }
 
 void AssetManager::checkInit() {

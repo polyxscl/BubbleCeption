@@ -111,7 +111,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freeglut.lib;FreeImage.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,19 +131,28 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freeglut.lib;FreeImage.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Asset\AssetManager.cpp" />
+    <ClCompile Include="src\Asset\AudioAsset.cpp" />
+    <ClCompile Include="src\Asset\ImageAsset.cpp" />
+    <ClCompile Include="src\Asset\MaterialAsset.cpp" />
+    <ClCompile Include="src\Asset\OBJAsset.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Game.interface.h" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Util\Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Asset\Asset.h" />
     <ClInclude Include="src\Asset\AssetManager.h" />
     <ClInclude Include="src\Asset\AssetManager.interface.h" />
+    <ClInclude Include="src\Asset\AudioAsset.h" />
+    <ClInclude Include="src\Asset\ImageAsset.h" />
+    <ClInclude Include="src\Asset\MaterialAsset.h" />
+    <ClInclude Include="src\Asset\OBJAsset.h" />
     <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Util\Logger.h" />

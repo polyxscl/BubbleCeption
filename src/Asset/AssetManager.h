@@ -14,9 +14,19 @@ public:
 
 	void loadAssets(const fs::path& directory);
 
+	// Interface methods
+
+	std::shared_ptr<ImageAsset> getImageAsset(std::string id) override;
+	std::shared_ptr<MaterialAsset> getMaterialAsset(std::string id) override;
+	std::shared_ptr<OBJAsset> getOBJAsset(std::string id) override;
+
 private:
 	static AssetManager* instance;
 	static void checkInit();
+
+	std::unordered_map<std::string, std::shared_ptr<ImageAsset>> images;
+	std::unordered_map<std::string, std::shared_ptr<MaterialAsset>> materials;
+	std::unordered_map<std::string, std::shared_ptr<OBJAsset>> objs;
 
 	static Logger logger;
 };
