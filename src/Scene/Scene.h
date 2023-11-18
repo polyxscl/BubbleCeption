@@ -18,6 +18,7 @@ public:
 	void attachFinishCallback(sceneFinishFuncType func);
 
 	virtual void init(IGame& game_interface) {}
+	virtual void clear(IGame& game_interface) {}
 	virtual void idle(IGame& game_interface, float t) {}
 	virtual void draw(IGame& game_interface) {}
 

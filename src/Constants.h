@@ -1,8 +1,8 @@
 #pragma once
 
-const char* GAME_NAME = "BubbleCeption";
+#define GAME_NAME "BubbleCeption"
 
-const int TILE_SIZE = 32;
+#define TILE_SIZE 32
 
-const int SCREEN_WIDTH = TILE_SIZE * 40;
-const int SCREEN_HEIGHT = TILE_SIZE * 30;
+#define SCREEN_WIDTH TILE_SIZE * 40
+#define SCREEN_HEIGHT TILE_SIZE * 30

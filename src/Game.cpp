@@ -38,6 +38,9 @@ Game::Game(int argc, char** argv) {
 	glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	glutCreateWindow(GAME_NAME);
 
+	// Initialize InputManager.
+	input_manager.init();
+
 	// Initialize Assets.
 	asset_manager.loadAssets(ASSETS_PATH);
 

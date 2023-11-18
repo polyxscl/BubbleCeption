@@ -16,7 +16,10 @@ public:
 	~ImageAsset() override;
 
 	void load() override;
-	GLuint get_texture_id();
+	GLuint getTextureID() const;
+
+	int getWidth() const;
+	int getHeight() const;
 
 private:
 	GLuint texture_id = 0;
@@ -24,7 +27,7 @@ private:
 	int width = 0;
 	int height = 0;
 
-	void bind_texture();
+	void bindTexture();
 
 	static Logger logger;
 };

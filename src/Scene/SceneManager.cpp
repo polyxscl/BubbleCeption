@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "SceneManager.h"
 
 #include "GL/freeglut.h"
@@ -58,14 +60,31 @@ void SceneManager::registerScene(Scene* scene) {
 void SceneManager::switchCallback(Scene* self, Scene* other) {
 	checkInit();
 
+	auto& stack = instance->scene_stack;
+
+	self->clear(*game_interface);
+	auto it = std::find(stack.begin(), stack.end(), self);
+	*it = other;
+	delete self;
 }
 
 void SceneManager::appendCallback(Scene* self, Scene* other) {
 	checkInit();
+
+	auto& stack = instance->scene_stack;
+
+	auto it = std::find(stack.begin(), stack.end(), self);
+	stack.insert(it + 1, other);
 }
 
 void SceneManager::finishCallback(Scene* self) {
 	checkInit();
+
+	auto& stack = instance->scene_stack;
+
+	self->clear(*game_interface);
+	stack.erase(std::find(stack.begin(), stack.end(), self));
+	delete self;
 }
 
 void SceneManager::checkInit() {

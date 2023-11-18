@@ -1,30 +1,4 @@
-#include <bitset>
 #include "ImageAsset.h"
-
-static std::wstring stringToWstring(const std::string& str) {
-	std::wstring wstr(str.begin(), str.end());
-	return wstr;
-}
-
-
-void printBits(unsigned char* data, int width, int height) {
-	
-	int bytesPerPixel = 4; // Assuming 4 bytes per pixel (RGBA)
-	for (int y = 0; y < height; ++y) {
-		for (int x = 0; x < width; ++x) {
-			unsigned char* pixel = data + (y * width + x) * bytesPerPixel;
-			std::bitset<8> r(pixel[0]);
-			std::bitset<8> g(pixel[1]);
-			std::bitset<8> b(pixel[2]);
-			std::bitset<8> a(pixel[3]);
-			std::cout << "Pixel (" << x << ", " << y << "): "
-				<< "R: " << r << ", "
-				<< "G: " << g << ", "
-				<< "B: " << b << ", "
-				<< "A: " << a << std::endl;
-		}
-	}
-}
 
 Logger ImageAsset::logger("ImageAsset");
 
@@ -50,10 +24,10 @@ void ImageAsset::load() {
 	data = new GLubyte[4 * width * height]; // Allocate memory for image data
 	std::memcpy(data, FreeImage_GetBits(image), 4 * width * height); // Copy data from image
 
-	bind_texture();
+	bindTexture();
 }
 
-void ImageAsset::bind_texture() {
+void ImageAsset::bindTexture() {
 
 	GLuint texture_id_buffer = 0;
 	glGenTextures(1, &texture_id_buffer);
@@ -73,6 +47,14 @@ void ImageAsset::bind_texture() {
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA_EXT, GL_UNSIGNED_BYTE, data);
 }
 
-GLuint ImageAsset::get_texture_id() {
+GLuint ImageAsset::getTextureID() const {
 	return texture_id;
+}
+
+int ImageAsset::getWidth() const {
+	return width;
+}
+
+int ImageAsset::getHeight() const {
+	return height;
 }
