@@ -16,7 +16,6 @@ public:
 	~ImageAsset() override;
 
 	void load() override;
-	void bind_texture();
 	GLuint get_texture_id();
 
 private:
@@ -24,6 +23,8 @@ private:
 	GLubyte* data = nullptr;
 	int width = 0;
 	int height = 0;
+
+	void bind_texture();
 
 	static Logger logger;
 };

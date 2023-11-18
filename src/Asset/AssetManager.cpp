@@ -37,15 +37,21 @@ void AssetManager::loadAssets(const fs::path& directory) {
 
 				// Material data
 				if (ext == ".mtl") {
-					materials.emplace(id, std::make_shared<MaterialAsset>(id, path));
+					auto ptr = std::make_shared<MaterialAsset>(id, path);
+					ptr->load();
+					materials.emplace(id, ptr);
 				}
 				// Wavefront OBJ data
 				else if (ext == ".obj") {
-					objs.emplace(id, std::make_shared<OBJAsset>(id, path));
+					auto ptr = std::make_shared<OBJAsset>(id, path);
+					ptr->load();
+					objs.emplace(id, ptr);
 				}
 				// Image data
 				else if (FreeImage_GetFileType(path.string().c_str(), 0) != FREE_IMAGE_FORMAT::FIF_UNKNOWN) {
-					images.emplace(id, std::make_shared<ImageAsset>(id, path));
+					auto ptr = std::make_shared<ImageAsset>(id, path);
+					ptr->load();
+					images.emplace(id, ptr);
 				}
 				else --count;
 			}

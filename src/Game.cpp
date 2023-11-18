@@ -2,6 +2,7 @@
 #include <filesystem>
 
 #include "Game.h"
+#include "Scene/LoadingScene.h"
 #include "Constants.h"
 
 #include <GL/freeglut.h>
@@ -23,8 +24,8 @@ Game::Game(int argc, char** argv) {
 	// Initialize GLUT.
 	glutInit(&argc, argv);
 
-	// Initialize Assets.
-	asset_manager.loadAssets(ASSETS_PATH);
+	// DO NOT PUT INITIALIZING CODE HERE.
+	// THE OPENGL CONTEXT IS NOT LOADED UNTIL glutCreateWindow().
 
 	// Initialize Window.
 	logger << "Initializing Window..." << logger.info;
@@ -36,6 +37,14 @@ Game::Game(int argc, char** argv) {
 	);
 	glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	glutCreateWindow(GAME_NAME);
+
+	// Initialize Assets.
+	asset_manager.loadAssets(ASSETS_PATH);
+
+	// Initialize Scenes.
+	scene_manager.init(this);
+
+	scene_manager.registerScene(new LoadingScene());
 
 	// Singleton
 	instance = this;
@@ -51,10 +60,24 @@ void Game::run() {
 
 void Game::display() {
 	Game::checkInit();
+
+	glClearColor(0.f, 0.f, 0.f, 0.f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	auto& unwrapped_texture = *(instance->asset_manager.getImageAsset("snu").get());
+
+	Vector2<float> size(0.3f, 0.3f);
+	Vector2<float> pos(0.0f, 0.0f);
+
+	instance->scene_manager.draw();
+
+	glutSwapBuffers();
 }
 
 void Game::idle() {
 	Game::checkInit();
+
+	instance->scene_manager.idle(0.0);
 
 	glutPostRedisplay();
 }
@@ -65,6 +88,10 @@ IAssetManager& Game::getIAssetManager() {
 
 IInputManager& Game::getIInputManager() {
 	return input_manager;
+}
+
+ISceneManager& Game::getISceneManager() {
+	return scene_manager;
 }
 
 void Game::checkInit() {

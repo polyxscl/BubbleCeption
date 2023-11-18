@@ -145,6 +145,9 @@
     <ClCompile Include="src\Input\InputManager.cpp" />
     <ClCompile Include="src\Input\InputManager.interface.h" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Scene\LoadingScene.cpp" />
+    <ClCompile Include="src\Scene\Scene.cpp" />
+    <ClCompile Include="src\Scene\SceneManager.cpp" />
     <ClCompile Include="src\Util\Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +162,11 @@
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Input\Input.h" />
     <ClInclude Include="src\Input\InputManager.h" />
+    <ClInclude Include="src\Scene\LoadingScene.h" />
+    <ClInclude Include="src\Scene\LoadingScene.interface.h" />
+    <ClInclude Include="src\Scene\Scene.h" />
+    <ClInclude Include="src\Scene\SceneManager.h" />
+    <ClInclude Include="src\Scene\SceneManager.interface.h" />
     <ClInclude Include="src\Util\Logger.h" />
     <ClInclude Include="src\Util\Rect.h" />
     <ClInclude Include="src\Util\Vector.h" />
