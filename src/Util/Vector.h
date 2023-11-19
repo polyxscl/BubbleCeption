@@ -36,20 +36,22 @@ public:
     Vector2(const Vector4<U>& other) : x(static_cast<T>(other.x)), y(static_cast<T>(other.y)) {}
 
     // Vector addition and assignment
-    Vector2& operator+=(const Vector2& other) const {
+    template <typename U>
+    Vector2& operator+=(const Vector2<U>& other) {
         this->x += other.x;
         this->y += other.y;
         return *this;
     }
 
     // Vector addition
-    Vector2 operator+(const Vector2& other) const {
+    template <typename U>
+    Vector2 operator+(const Vector2<U>& other) const {
         return Vector2(*this) += other;
     }
 
     // Scalar addition and assignment
     template <typename U>
-    Vector2& operator+=(const U& scalar) const {
+    Vector2& operator+=(const U& scalar) {
         this->x = scalar;
         this->y = scalar;
         return *this;

@@ -9,7 +9,6 @@ public:
 	virtual void idle(float t) {};
 	virtual void draw() {};
 
-protected:
 	Vector3<float> pos;
 
 };

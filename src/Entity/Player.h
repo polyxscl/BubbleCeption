@@ -5,6 +5,9 @@
 
 class Player : public Entity2D, public EntityPhysics {
 public:
+	Player()
+		: Entity2D(), EntityPhysics() {}
+
 	void init(IGame& game_interface) override;
 	void idle(float t) override;
 

@@ -14,7 +14,7 @@ void Player::init(IGame& game_interface) {
 void Player::idle(float t) {
 	EntityPhysics::idle(t);
 
-	if (pos.y < -(SCREEN_HEIGHT + size.y) / 2)
+	if (pos.y < -size.y)
 		pos.y += SCREEN_HEIGHT + size.y;
 }
 

@@ -2,6 +2,8 @@
 
 #include "Scene.h"
 #include "Entity/Player.h"
+#include "Scene/Camera.h"
+#include "Map/Map.h"
 
 class GameScene : public Scene{
 public:
@@ -14,5 +16,7 @@ public:
 
 private:
 	Player player;
+	Camera camera;
+	Map* map;
 
 };
