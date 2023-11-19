@@ -19,6 +19,8 @@ public:
 private:
 	static Game* instance;
 
+	int window_id;
+
 	AssetManager asset_manager;
 	InputManager input_manager;
 	SceneManager scene_manager;
@@ -26,6 +28,7 @@ private:
 	static void display();
 	static void idle();
 	static void checkInit();
+	static void onClose();
 
 	static Logger logger;
 

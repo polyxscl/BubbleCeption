@@ -24,6 +24,11 @@ Game::Game(int argc, char** argv) {
 	// Initialize GLUT.
 	glutInit(&argc, argv);
 
+	// For correct memory leak reports
+	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
+	
+	// fs::path ASSETS_PATH = fs::current_path() / "assets/";
+
 	// DO NOT PUT INITIALIZING CODE HERE.
 	// THE OPENGL CONTEXT IS NOT LOADED UNTIL glutCreateWindow().
 
@@ -36,7 +41,7 @@ Game::Game(int argc, char** argv) {
 		(glutGet(GLUT_SCREEN_HEIGHT) - SCREEN_HEIGHT) / 2
 	);
 	glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-	glutCreateWindow(GAME_NAME);
+	window_id = glutCreateWindow(GAME_NAME);
 
 	// Initialize InputManager.
 	input_manager.init();
@@ -55,6 +60,7 @@ Game::Game(int argc, char** argv) {
 	// Set GLUT functions.
 	glutDisplayFunc(display);
 	glutIdleFunc(idle);
+	glutCloseFunc(onClose);
 }
 
 void Game::run() {
@@ -83,6 +89,12 @@ void Game::idle() {
 	instance->scene_manager.idle(0.0);
 
 	glutPostRedisplay();
+}
+
+void Game::onClose() {
+	Game::checkInit();
+
+	glutLeaveMainLoop();
 }
 
 IAssetManager& Game::getIAssetManager() {

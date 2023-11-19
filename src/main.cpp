@@ -1,6 +1,8 @@
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
+#if defined(_DEBUG)
+	#define _CRTDBG_MAP_ALLOC
+	#include <stdlib.h>
+	#include <crtdbg.h>
+#endif
 
 #include "Game.h"
 
@@ -12,4 +14,5 @@ int main(int argc, char** argv) {
 	Game game(argc, argv);
 
 	game.run();
+	return 0;
 }
