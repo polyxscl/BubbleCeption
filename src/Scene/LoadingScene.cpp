@@ -45,7 +45,7 @@ void LoadingScene::draw(IGame& game_interface) {
 
 	auto& unwrapped_texture = *(texture.get());
 
-	Vector2<float> size(unwrapped_texture.getWidth() * TILE_SIZE / 16, unwrapped_texture.getHeight() * TILE_SIZE / 16);
+	Vector2<float> size(10.f, 10.f * unwrapped_texture.getHeight() / unwrapped_texture.getWidth());
 	Vector2<float> pos(0.0f, 0.0f);
 
 	glMatrixMode(GL_PROJECTION);

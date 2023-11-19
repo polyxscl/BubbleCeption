@@ -46,8 +46,8 @@ private:
 	static InputManager* instance;
 	static void checkInit();
 
-	static void __keyboardCallback(unsigned char key, int x, int y, bool down);
-	static void __specialCallback(int key, int x, int y, bool down);
+	static void __keyboardCallback(unsigned char key, int x, int y, bool down, bool was_down);
+	static void __specialCallback(int key, int x, int y, bool down, bool was_down);
 
 	bool key_press_table[256];
 	std::unordered_set<int> special_key_press_table;

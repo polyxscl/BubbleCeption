@@ -6,6 +6,7 @@ enum class MOUSE_BUTTON { LEFT, MIDDLE, RIGHT };
 
 struct InputKeyboard {
 	const unsigned char key;
+	const bool was_down;
 	const bool down;
 	const Vector2<int> mouse_pos;
 	const bool ctrl, alt, shift;
@@ -13,6 +14,7 @@ struct InputKeyboard {
 
 struct InputKeyboardSpecial {
 	const int key;
+	const bool was_down;
 	const bool down;
 	const Vector2<int> mouse_pos;
 	const bool ctrl, alt, shift;

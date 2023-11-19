@@ -67,6 +67,8 @@ void SceneManager::switchCallback(Scene* self, Scene* other) {
 	auto it = std::find(stack.begin(), stack.end(), self);
 	*it = other;
 	delete self;
+
+	other->init(*game_interface);
 }
 
 void SceneManager::appendCallback(Scene* self, Scene* other) {
@@ -76,6 +78,8 @@ void SceneManager::appendCallback(Scene* self, Scene* other) {
 
 	auto it = std::find(stack.begin(), stack.end(), self);
 	stack.insert(it + 1, other);
+
+	other->init(*game_interface);
 }
 
 void SceneManager::finishCallback(Scene* self) {

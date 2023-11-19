@@ -38,7 +38,7 @@ void InputManager::init() {
 	glutPassiveMotionFunc(passiveMotion);
 }
 
-void InputManager::__keyboardCallback(unsigned char key, int x, int y, bool down) {
+void InputManager::__keyboardCallback(unsigned char key, int x, int y, bool down, bool was_down) {
 	int mod = glutGetModifiers();
 	bool ctrl = (mod & GLUT_ACTIVE_CTRL) != 0;
 	bool shift = (mod & GLUT_ACTIVE_SHIFT) != 0;
@@ -46,6 +46,7 @@ void InputManager::__keyboardCallback(unsigned char key, int x, int y, bool down
 
 	auto input = InputKeyboard{
 		key,
+		was_down,
 		down,
 		Vector2<int>(x, y),
 		ctrl, shift, alt,
@@ -64,23 +65,23 @@ void InputManager::__keyboardCallback(unsigned char key, int x, int y, bool down
 	instance->ctrl = ctrl;
 	instance->shift = shift;
 	instance->alt = alt;
-
-	instance->key_press_table[key] = down;
 }
 
 void InputManager::keyboardDown(unsigned char key, int x, int y) {
 	InputManager::checkInit();
 
-	InputManager::__keyboardCallback(key, x, y, true);
+	InputManager::__keyboardCallback(key, x, y, true, instance->key_press_table[key]);
+	instance->key_press_table[key] = true;
 }
 
 void InputManager::keyboardUp(unsigned char key, int x, int y) {
 	InputManager::checkInit();
 
-	InputManager::__keyboardCallback(key, x, y, false);
+	InputManager::__keyboardCallback(key, x, y, false, instance->key_press_table[key]);
+	instance->key_press_table[key] = false;
 }
 
-void InputManager::__specialCallback(int key, int x, int y, bool down) {
+void InputManager::__specialCallback(int key, int x, int y, bool down, bool was_down) {
 	int mod = glutGetModifiers();
 	bool ctrl = (mod & GLUT_ACTIVE_CTRL) != 0;
 	bool shift = (mod & GLUT_ACTIVE_SHIFT) != 0;
@@ -88,6 +89,7 @@ void InputManager::__specialCallback(int key, int x, int y, bool down) {
 
 	auto input = InputKeyboardSpecial{
 		key,
+		was_down,
 		down,
 		Vector2<int>(x, y),
 		ctrl, shift, alt,
@@ -105,20 +107,24 @@ void InputManager::__specialCallback(int key, int x, int y, bool down) {
 	instance->ctrl = ctrl;
 	instance->shift = shift;
 	instance->alt = alt;
-
-	instance->special_key_press_table.insert(key);
 }
 
 void InputManager::specialDown(int key, int x, int y) {
 	InputManager::checkInit();
 
-	InputManager::__specialCallback(key, x, y, true);
+	InputManager::__specialCallback(key, x, y, true,
+		instance->special_key_press_table.find(key) != instance->special_key_press_table.end()
+	);
+	instance->special_key_press_table.insert(key);
 }
 
 void InputManager::specialUp(int key, int x, int y) {
 	InputManager::checkInit();
 
-	InputManager::__specialCallback(key, x, y, false);
+	InputManager::__specialCallback(key, x, y, false,
+		instance->special_key_press_table.find(key) != instance->special_key_press_table.end()
+	);
+	instance->special_key_press_table.erase(key);
 }
 
 void InputManager::mouse(int button, int state, int x, int y) {

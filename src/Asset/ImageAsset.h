@@ -21,6 +21,10 @@ public:
 	int getWidth() const;
 	int getHeight() const;
 
+	void fromRawRGBA8(int width, int height, GLubyte* input_data);
+
+	void dumpBitData() const;
+
 private:
 	GLuint texture_id = 0;
 	GLubyte* data = nullptr;

@@ -67,10 +67,33 @@ void AssetManager::loadAssets(const fs::path& directory) {
 		logger << "Image assets might not have been loaded properly!" << logger.error;
 	}
 	logger << "Found " << count << " assets." << logger.info;
+
+	// Initialize placeholder assets
+
+	GLubyte* null_image_data = new GLubyte[4 * 16 * 16]();
+	for (int i = 0; i < 16; ++i) {
+		for (int j = 0; j < 16; ++j) {
+			auto index = 4 * (16 * i + j);
+			null_image_data[index + 1] = 0;
+			null_image_data[index + 3] = 255;
+			if ((i >> 3) + (j >> 3) == 1) {
+				null_image_data[index + 0] = 255;
+				null_image_data[index + 2] = 255;
+			} 
+			else {
+				null_image_data[index + 0] = 0;
+				null_image_data[index + 2] = 0;
+			}
+		}
+	}
+
+	auto ptr = std::make_shared<ImageAsset>("null");
+	ptr->fromRawRGBA8(16, 16, null_image_data);
+	images.emplace("null", ptr);
 }
 
 std::shared_ptr<ImageAsset> AssetManager::getImageAsset(std::string id) {
-	return (images.find(id) != images.end()) ? images[id] : nullptr;
+	return (images.find(id) != images.end()) ? images[id] : images["null"];
 }
 
 std::shared_ptr<MaterialAsset> AssetManager::getMaterialAsset(std::string id) {

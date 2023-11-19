@@ -47,6 +47,16 @@ void ImageAsset::bindTexture() {
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA_EXT, GL_UNSIGNED_BYTE, data);
 }
 
+void ImageAsset::fromRawRGBA8(int width, int height, GLubyte* input_data) {
+	this->width = width;
+	this->height = height;
+
+	delete data;
+	data = input_data;
+
+	bindTexture();
+}
+
 GLuint ImageAsset::getTextureID() const {
 	return texture_id;
 }
@@ -57,4 +67,23 @@ int ImageAsset::getWidth() const {
 
 int ImageAsset::getHeight() const {
 	return height;
+}
+
+void ImageAsset::dumpBitData() const {
+	size_t dataSize = width * height * 4; // Assuming 4 bytes per pixel (RGBA)
+
+	for (size_t i = 0; i < dataSize; ++i) {
+		// Output as hexadecimal
+		std::cout << std::hex << std::setw(2) << std::setfill('0')
+			<< static_cast<unsigned>(data[i]);
+
+		if ((i + 1) % 4 == 0) {
+			std::cout << std::endl; // New line for each pixel for readability
+		}
+		else {
+			std::cout << " "; // Separate the components of a single pixel
+		}
+	}
+
+	std::cout << std::dec;
 }

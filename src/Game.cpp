@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include <filesystem>
+#include <ctime>
 
 #include "Game.h"
 #include "Scene/LoadingScene.h"
@@ -9,6 +10,7 @@
 
 namespace fs = std::filesystem;
 
+static clock_t last_time = clock();
 static fs::path ASSETS_PATH = fs::current_path() / "assets/";
 
 Logger Game::logger("Game");
@@ -37,10 +39,10 @@ Game::Game(int argc, char** argv) {
 
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowPosition(
-		(glutGet(GLUT_SCREEN_WIDTH) - SCREEN_WIDTH) / 2,
-		(glutGet(GLUT_SCREEN_HEIGHT) - SCREEN_HEIGHT) / 2
+		(glutGet(GLUT_SCREEN_WIDTH) - SCREEN_WIDTH * TILE_SIZE) / 2,
+		(glutGet(GLUT_SCREEN_HEIGHT) - SCREEN_HEIGHT * TILE_SIZE) / 2
 	);
-	glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	glutInitWindowSize(SCREEN_WIDTH * TILE_SIZE, SCREEN_HEIGHT * TILE_SIZE);
 	window_id = glutCreateWindow(GAME_NAME);
 
 	// Initialize InputManager.
@@ -85,10 +87,11 @@ void Game::display() {
 
 void Game::idle() {
 	Game::checkInit();
-
-	instance->scene_manager.idle(0.0);
+	
+	instance->scene_manager.idle((clock() - last_time) / 1000.f);
 
 	glutPostRedisplay();
+	last_time = clock();
 }
 
 void Game::onClose() {
