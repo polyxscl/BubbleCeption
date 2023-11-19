@@ -5,6 +5,8 @@
 #include <istream>
 #include <stdexcept>
 
+#include <functional>
+
 // Forward declaration for Vector2 <-> Vector3 <-> Vector4 implicit conversion
 template <typename T>
 class Vector2;
@@ -416,3 +418,77 @@ Vector4<T> operator/(const U& scalar, const Vector4<T>& vec) {
     }
     return Vector4<T>(scalar / vec.x, scalar / vec.y, scalar / vec.z, scalar / vec.w);
 }
+
+// Equality operator for Vector2
+template <typename T>
+bool operator==(const Vector2<T>& lhs, const Vector2<T>& rhs) {
+    return lhs.x == rhs.x && lhs.y == rhs.y;
+}
+
+// Equality operator for Vector3
+template <typename T>
+bool operator==(const Vector3<T>& lhs, const Vector3<T>& rhs) {
+    return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z;
+}
+
+// Equality operator for Vector4
+template <typename T>
+bool operator==(const Vector4<T>& lhs, const Vector4<T>& rhs) {
+    return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z && lhs.w == rhs.w;
+}
+
+// You also need to define the inequality operators
+template <typename T>
+bool operator!=(const Vector2<T>& lhs, const Vector2<T>& rhs) {
+    return !(lhs == rhs);
+}
+
+template <typename T>
+bool operator!=(const Vector3<T>& lhs, const Vector3<T>& rhs) {
+    return !(lhs == rhs);
+}
+
+template <typename T>
+bool operator!=(const Vector4<T>& lhs, const Vector4<T>& rhs) {
+    return !(lhs == rhs);
+}
+
+// Forward declare the specializations
+namespace std {
+    template <typename T> struct hash<Vector2<T>>;
+    template <typename T> struct hash<Vector3<T>>;
+    template <typename T> struct hash<Vector4<T>>;
+}
+
+// Hash specialization for Vector2
+template <typename T>
+struct std::hash<Vector2<T>> {
+    size_t operator()(const Vector2<T>& v) const noexcept {
+        size_t hx = std::hash<T>()(v.x);
+        size_t hy = std::hash<T>()(v.y);
+        return hx ^ (hy << 1);
+    }
+};
+
+// Hash specialization for Vector3
+template <typename T>
+struct std::hash<Vector3<T>> {
+    size_t operator()(const Vector3<T>& v) const noexcept {
+        size_t hx = std::hash<T>()(v.x);
+        size_t hy = std::hash<T>()(v.y);
+        size_t hz = std::hash<T>()(v.z);
+        return ((hx ^ (hy << 1)) >> 1) ^ (hz << 1);
+    }
+};
+
+// Hash specialization for Vector4
+template <typename T>
+struct std::hash<Vector4<T>> {
+    size_t operator()(const Vector4<T>& v) const noexcept {
+        size_t hx = std::hash<T>()(v.x);
+        size_t hy = std::hash<T>()(v.y);
+        size_t hz = std::hash<T>()(v.z);
+        size_t hw = std::hash<T>()(v.w);
+        return ((hx ^ (hy << 1)) ^ (hz << 2)) ^ (hw << 3);
+    }
+};
