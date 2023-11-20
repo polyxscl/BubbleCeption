@@ -2,11 +2,11 @@
 
 #include "Entity/EntityPhysics.h"
 
-Rect<float> SolidTile::hitbox = Rect<float>(Vector2<float>(-0.5f, -0.5f), Vector2<float>(0.5f, 0.5f));
-
 void SolidTile::init(IGame& game_interface) {
 	auto& asset_manager = game_interface.getIAssetManager();
 	texture = asset_manager.getImageAsset("solid_1");
+
+	hitbox = Rect<float>(Vector2<float>(-0.5f, -0.5f), Vector2<float>(0.5f, 0.5f));
 }
 
 void SolidTile::clear(IGame& game_interface) {
@@ -33,46 +33,50 @@ void SolidTile::onCollision(Entity* entity) {
 	EntityPhysics* ep = dynamic_cast<EntityPhysics*>(entity);
 
 	if (ep) {
-		float min_dist = INFINITY;
 		int selection = 0;
 
-		if (ep->pos.x < pos.x && ep->pos.x + ep->hitbox.right() > pos.x + hitbox.left()) {
-			min_dist = ep->pos.x - pos.x;
+		auto ex = ep->pos.x;
+		auto ey = ep->pos.y;
+		auto evx = ep->vel.x;
+		auto evy = ep->vel.y;
+		auto x = pos.x;
+		auto y = pos.y;
+
+		bool top = ey + ep->hitbox.bottom() < y + hitbox.top();
+		bool bottom = ey + ep->hitbox.top() > y + hitbox.bottom();
+		bool left = ex + ep->hitbox.right() > x + hitbox.left();
+		bool right = ex + ep->hitbox.left() < x + hitbox.right();
+		
+		const float leeway = 0.0f;
+
+		if (evx >= 0 && ex < x && left && ex - x + leeway < ey - y && ey - y < x - ex - leeway) {
 			selection = 1;
 		}
-		if (ep->pos.x > pos.x && ep->pos.x + ep->hitbox.left() < pos.x + hitbox.right()) {
-			auto dist = pos.x - ep->pos.x;
-			if (min_dist > dist) {
-				min_dist = dist;
-				selection = 2;
-			}
+		else if (evx <= 0 && ex > x && right && x - ex + leeway < ey - y && ey - y < ex - x - leeway) {
+			selection = 2;
 		}
-		if (ep->pos.y > pos.y && ep->pos.y + ep->hitbox.top() < pos.y + hitbox.bottom()) {
-			auto dist = ep->pos.y - pos.y;
-			if (min_dist > dist) {
-				min_dist = dist;
-				selection = 3;
-			}
+
+		if (evy >= 0 && ey < y && bottom && ey - y < ex - x && ex - x < y - ey) {
+			selection = 3;
 		}
-		if (ep->pos.y < pos.y && ep->pos.y + ep->hitbox.bottom() > pos.y + hitbox.top()) {
-			auto dist = pos.y - ep->pos.y;
-			if (min_dist > dist) {
-				min_dist = dist;
-				selection = 4;
-			}
+		else if (evy <= 0 && ey > y && top && y - ey < ex - x && ex - x < ey - y) {
+			selection = 4;
 		}
+
 		switch (selection) {
 		case 1:
-			ep->pos.x = pos.x + hitbox.left() - ep->hitbox.right();
+			ep->pos.x = x + hitbox.left() - ep->hitbox.right();
 			break;
 		case 2:
-			ep->pos.x = pos.x + hitbox.right() - ep->hitbox.left();
+			ep->pos.x = x + hitbox.right() - ep->hitbox.left();
 			break;
 		case 3:
-			ep->pos.y = pos.y + hitbox.bottom() - ep->hitbox.top();
+			ep->pos.y = y + hitbox.bottom() - ep->hitbox.top();
+			ep->vel.y = 0;
 			break;
 		case 4:
-			ep->pos.y = pos.y + hitbox.top() - ep->hitbox.bottom();
+			ep->pos.y = y + hitbox.top() - ep->hitbox.bottom();
+			ep->vel.y = 0;
 			break;
 		default:
 			break;

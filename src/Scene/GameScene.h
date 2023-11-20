@@ -12,6 +12,7 @@ public:
 	void idle(IGame& game_interface, float t) override;
 	void draw(IGame& game_interface) override;
 
+	void keyPressCallback(IInputManager& interface, const InputKeyboard& input);
 	void specialKeyPressCallback(IInputManager& interface, const InputKeyboardSpecial& input);
 
 private:

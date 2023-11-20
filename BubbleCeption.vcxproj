@@ -149,6 +149,7 @@
     <ClCompile Include="src\Input\InputManager.interface.h" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Map\Map.cpp" />
+    <ClCompile Include="src\Map\Tile\PlatformTile.cpp" />
     <ClCompile Include="src\Map\Tile\SolidTile.cpp" />
     <ClCompile Include="src\Map\Tile\Tile.cpp" />
     <ClCompile Include="src\Scene\Camera.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="src\Input\Input.h" />
     <ClInclude Include="src\Input\InputManager.h" />
     <ClInclude Include="src\Map\Map.h" />
+    <ClInclude Include="src\Map\Tile\PlatformTile.h" />
     <ClInclude Include="src\Map\Tile\SolidTile.h" />
     <ClInclude Include="src\Map\Tile\Tile.h" />
     <ClInclude Include="src\Scene\Camera.h" />

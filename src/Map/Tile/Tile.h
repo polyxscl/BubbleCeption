@@ -21,7 +21,7 @@ public:
 	Rect<float> getWorldHitbox() const;
 
 	const Vector3<int> pos;
-	static Rect<float> hitbox;
+	Rect<float> hitbox;
 
 	bool collidable;
 	bool visible;

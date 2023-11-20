@@ -2,6 +2,7 @@
 #include "GameScene.h"
 
 #include "Map/Tile/SolidTile.h"
+#include "Map/Tile/PlatformTile.h"
 
 using namespace std::placeholders;
 
@@ -9,6 +10,10 @@ void GameScene::init(IGame& game_interface) {
 	player.init(game_interface);
 
 	auto& input_manager = game_interface.getIInputManager();
+	input_manager.attachKeyPressCallback(
+		"gs_key",
+		std::bind(&GameScene::keyPressCallback, this, _1, _2)
+	);
 	input_manager.attachSpecialKeyPressCallback(
 		"gs_spkey",
 		std::bind(&GameScene::specialKeyPressCallback, this, _1, _2)
@@ -17,6 +22,10 @@ void GameScene::init(IGame& game_interface) {
 	map = new Map(SCREEN_WIDTH, SCREEN_HEIGHT);
 	for (int i = 0; i <= SCREEN_WIDTH; ++i)
 		map->setTile(game_interface, new SolidTile(Vector3<int>(i, 0, 0)));
+	for (int i = 5; i <= SCREEN_WIDTH - 5; ++i)
+		map->setTile(game_interface, new PlatformTile(Vector3<int>(i, 4, 0)));
+	map->setTile(game_interface, new SolidTile(Vector3<int>(4, 4, 0)));
+	map->setTile(game_interface, new SolidTile(Vector3<int>(SCREEN_WIDTH - 5, 4, 0)));
 
 	camera.setViewportSize(Vector2<float>(SCREEN_WIDTH, SCREEN_HEIGHT));
 	camera.setCenter(Vector3<float>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f));
@@ -27,6 +36,7 @@ void GameScene::init(IGame& game_interface) {
 void GameScene::clear(IGame& game_interface) {
 	auto& input_manager = game_interface.getIInputManager();
 	input_manager.detachSpecialKeyPressCallback("gs_spkey");
+	input_manager.detachKeyPressCallback("gs_key");
 
 	delete map;
 }
@@ -55,9 +65,9 @@ void GameScene::draw(IGame& game_interface) {
 	player.draw();
 }
 
-void GameScene::specialKeyPressCallback(IInputManager& interface, const InputKeyboardSpecial& input) {
+void GameScene::keyPressCallback(IInputManager& interface, const InputKeyboard& input) {
 	switch (input.key) {
-	case GLUT_KEY_LEFT:
+	case 'a':
 		if (!input.was_down && input.down) {
 			player.startMovingLeft();
 		}
@@ -65,7 +75,7 @@ void GameScene::specialKeyPressCallback(IInputManager& interface, const InputKey
 			player.stopMovingLeft();
 		}
 		break;
-	case GLUT_KEY_RIGHT:
+	case 'd':
 		if (!input.was_down && input.down) {
 			player.startMovingRight();
 		}
@@ -73,5 +83,14 @@ void GameScene::specialKeyPressCallback(IInputManager& interface, const InputKey
 			player.stopMovingRight();
 		}
 		break;
+	case 'w':
+		if (!input.was_down && input.down) {
+			player.jump();
+		}
+		break;
 	}
+}
+
+void GameScene::specialKeyPressCallback(IInputManager& interface, const InputKeyboardSpecial& input) {
+
 }

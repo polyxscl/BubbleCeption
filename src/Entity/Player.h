@@ -15,5 +15,10 @@ public:
 	void startMovingRight();
 	void stopMovingLeft();
 	void stopMovingRight();
+	
+	void jump();
 
+private:
+	bool is_moving_left = false;
+	bool is_moving_right = false;
 };
