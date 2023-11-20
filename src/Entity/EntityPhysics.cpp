@@ -1,8 +1,8 @@
 #include "EntityPhysics.h"
 
 void EntityPhysics::idle(float t) {
-	pos += (vel + accel / 2) * t;
 	vel += accel * t;
+	pos += vel * t;
 }
 
 Rect<float> EntityPhysics::getWorldHitbox() const {

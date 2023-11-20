@@ -1,0 +1,271 @@
+{
+    "width": 20,
+    "height": 15,
+    "palette": "Candy",
+    "data": [
+        {
+            "id": "SOLID",
+            "pos": [0, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 1]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 2]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 3]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 4]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 5]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 6]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 7]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 8]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 9]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 10]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 11]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 12]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 13]
+        },
+        {
+            "id": "SOLID",
+            "pos": [0, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [1, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [1, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [2, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [2, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [3, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [3, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [4, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [4, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [5, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [5, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [6, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [6, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [7, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [7, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [8, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [8, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [9, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [9, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [10, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [10, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [11, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [11, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [12, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [12, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [13, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [13, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [14, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [14, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [15, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [15, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [16, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [16, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [17, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [17, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [18, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [18, 14]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 0]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 1]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 2]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 3]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 4]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 5]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 6]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 7]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 8]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 9]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 10]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 11]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 12]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 13]
+        },
+        {
+            "id": "SOLID",
+            "pos": [19, 14]
+        }
+    ]
+}

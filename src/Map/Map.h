@@ -5,12 +5,16 @@
 
 #include "Util/Vector.h"
 #include "Map/Tile/Tile.h"
+#include "Asset/MapAsset.h"
 
 class Map {
 public:
-	Map() = delete;
+	explicit Map();
 	explicit Map(int width, int height);
 	~Map();
+
+	void clear();
+	void loadFromMapAsset(IGame& game_interface, std::shared_ptr<MapAsset> map_asset);
 
 	void draw(const Camera& camera) const;
 	void handleCollision(Entity* entity);
@@ -23,5 +27,7 @@ private:
 	int height;
 
 	std::unordered_map<Vector3<int>, Tile*> data;
+
+	static Logger logger;
 
 };

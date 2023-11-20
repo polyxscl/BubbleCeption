@@ -47,6 +47,12 @@ void AssetManager::loadAssets(const fs::path& directory) {
 					ptr->load();
 					objs.emplace(id, ptr);
 				}
+				// Map data
+				else if (ext == ".json") {
+					auto ptr = std::make_shared<MapAsset>(id, path);
+					ptr->load();
+					maps.emplace(id, ptr);
+				}
 				// Image data
 				else if (FreeImage_GetFileType(path.string().c_str(), 0) != FREE_IMAGE_FORMAT::FIF_UNKNOWN) {
 					auto ptr = std::make_shared<ImageAsset>(id, path);
@@ -63,8 +69,8 @@ void AssetManager::loadAssets(const fs::path& directory) {
 		}
 	}
 	catch (const std::exception& e) {
-		logger << "The exception has occurred in AssetManager::load_images() with the exception : " << e.what() << logger.error;
-		logger << "Image assets might not have been loaded properly!" << logger.error;
+		logger << "The exception has occurred in AssetManager::loadAssets() with the exception : " << e.what() << logger.error;
+		logger << "Assets might not have been loaded properly!" << logger.error;
 	}
 	logger << "Found " << count << " assets." << logger.info;
 
@@ -93,15 +99,39 @@ void AssetManager::loadAssets(const fs::path& directory) {
 }
 
 std::shared_ptr<ImageAsset> AssetManager::getImageAsset(std::string id) {
-	return (images.find(id) != images.end()) ? images[id] : images["null"];
+	if (images.find(id) != images.end())
+		return images[id];
+	else {
+		logger << "Failed to retrieve ImageAsset of id " << id << " - replacing with null texture..." << logger.warn;
+		return images["null"];
+	}
 }
 
 std::shared_ptr<MaterialAsset> AssetManager::getMaterialAsset(std::string id) {
-	return (materials.find(id) != materials.end()) ? materials[id] : nullptr;
+	if (materials.find(id) != materials.end())
+		return materials[id];
+	else {
+		logger << "Failed to retrieve MaterialAsset of id " << id << " - returning nullptr..." << logger.warn;
+		return nullptr;
+	}
 }
 
 std::shared_ptr<OBJAsset> AssetManager::getOBJAsset(std::string id) {
-	return (objs.find(id) != objs.end()) ? objs[id] : nullptr;
+	if (objs.find(id) != objs.end())
+		return objs[id];
+	else {
+		logger << "Failed to retrieve OBJAsset of id " << id << " - returning nullptr..." << logger.warn;
+		return nullptr;
+	}
+}
+
+std::shared_ptr<MapAsset> AssetManager::getMapAsset(std::string id) {
+	if (maps.find(id) != maps.end())
+		return maps[id];
+	else {
+		logger << "Failed to retrieve MapAsset of id " << id << " - returning nullptr..." << logger.warn;
+		return nullptr;
+	}
 }
 
 void AssetManager::checkInit() {

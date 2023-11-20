@@ -138,6 +138,7 @@
     <ClCompile Include="src\Asset\AssetManager.cpp" />
     <ClCompile Include="src\Asset\AudioAsset.cpp" />
     <ClCompile Include="src\Asset\ImageAsset.cpp" />
+    <ClCompile Include="src\Asset\MapAsset.cpp" />
     <ClCompile Include="src\Asset\MaterialAsset.cpp" />
     <ClCompile Include="src\Asset\OBJAsset.cpp" />
     <ClCompile Include="src\Entity\Entity2D.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="src\Asset\AssetManager.interface.h" />
     <ClInclude Include="src\Asset\AudioAsset.h" />
     <ClInclude Include="src\Asset\ImageAsset.h" />
+    <ClInclude Include="src\Asset\MapAsset.h" />
     <ClInclude Include="src\Asset\MaterialAsset.h" />
     <ClInclude Include="src\Asset\OBJAsset.h" />
     <ClInclude Include="src\Constants.h" />

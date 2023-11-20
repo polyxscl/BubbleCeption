@@ -19,16 +19,12 @@ void GameScene::init(IGame& game_interface) {
 		std::bind(&GameScene::specialKeyPressCallback, this, _1, _2)
 	);
 
-	map = new Map(SCREEN_WIDTH, SCREEN_HEIGHT);
-	for (int i = 0; i <= SCREEN_WIDTH; ++i)
-		map->setTile(game_interface, new SolidTile(Vector3<int>(i, 0, 0)));
-	for (int i = 5; i <= SCREEN_WIDTH - 5; ++i)
-		map->setTile(game_interface, new PlatformTile(Vector3<int>(i, 4, 0)));
-	map->setTile(game_interface, new SolidTile(Vector3<int>(4, 4, 0)));
-	map->setTile(game_interface, new SolidTile(Vector3<int>(SCREEN_WIDTH - 5, 4, 0)));
+	auto& asset_manager = game_interface.getIAssetManager();
+	map = new Map();
+	map->loadFromMapAsset(game_interface, asset_manager.getMapAsset("level1"));
 
 	camera.setViewportSize(Vector2<float>(SCREEN_WIDTH, SCREEN_HEIGHT));
-	camera.setCenter(Vector3<float>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f));
+	camera.setCenter(Vector3<float>(SCREEN_WIDTH / 2.f - 0.5f, SCREEN_HEIGHT / 2, 0.0f));
 
 	player.pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
 }
