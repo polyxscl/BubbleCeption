@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Entity/Entity2D.h"
 #include "Entity/EntityPhysics.h"
 
-class Player : public Entity2D, public EntityPhysics {
+class Player : public EntityPhysics {
 public:
 	Player()
-		: Entity2D(), EntityPhysics() {}
+		: EntityPhysics() {}
 
 	void init(IGame& game_interface) override;
 	void idle(float t) override;
+	void draw() override;
 
 	void startMovingLeft();
 	void startMovingRight();
@@ -19,6 +19,12 @@ public:
 	void jump();
 
 private:
+	bool is_visible = true;
+	Vector3<float> size;
+	std::shared_ptr<ImageAsset> texture;
+
+	enum class DIRECTION { LEFT, RIGHT } direction;
+
 	bool is_moving_left = false;
 	bool is_moving_right = false;
 };
