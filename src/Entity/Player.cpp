@@ -15,35 +15,6 @@ void Player::init(IGame& game_interface) {
 	texture = asset_manager.getImageAsset("player");
 }
 
-void Player::draw() {
-	// If texture does not exist, return.
-	if (!texture) return;
-
-	// If the entity is not visible, return.
-	if (!is_visible) return;
-
-	auto& unwrapped_texture = *(texture.get());
-
-	glEnable(GL_TEXTURE_2D);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-	glBindTexture(GL_TEXTURE_2D, unwrapped_texture.getTextureID());
-	glBegin(GL_QUADS);
-	if (direction == DIRECTION::LEFT) {
-		glTexCoord2f(0.0f, 0.0f); glVertex2f(size.x / 2 + pos.x, -size.y / 2 + pos.y);
-		glTexCoord2f(0.0f, 1.0f); glVertex2f(size.x / 2 + pos.x, size.y / 2 + pos.y);
-		glTexCoord2f(1.0f, 1.0f); glVertex2f(-size.x / 2 + pos.x, size.y / 2 + pos.y);
-		glTexCoord2f(1.0f, 0.0f); glVertex2f(-size.x / 2 + pos.x, -size.y / 2 + pos.y);
-	}
-	else if (direction == DIRECTION::RIGHT) {
-		glTexCoord2f(0.0f, 0.0f); glVertex2f(-size.x / 2 + pos.x, -size.y / 2 + pos.y);
-		glTexCoord2f(0.0f, 1.0f); glVertex2f(-size.x / 2 + pos.x, size.y / 2 + pos.y);
-		glTexCoord2f(1.0f, 1.0f); glVertex2f(size.x / 2 + pos.x, size.y / 2 + pos.y);
-		glTexCoord2f(1.0f, 0.0f); glVertex2f(size.x / 2 + pos.x, -size.y / 2 + pos.y);
-	}
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
-}
-
 void Player::idle(float t) {
 	if (is_moving_left && is_moving_right) {
 		vel.x = 0.f;
@@ -67,13 +38,19 @@ void Player::idle(float t) {
 		pos.y -= SCREEN_HEIGHT + size.y;
 }
 
+void Player::draw() {
+	Entity2D::draw();
+}
+
 void Player::startMovingLeft() {
 	direction = DIRECTION::LEFT;
+	flipped = true;
 	is_moving_left = true;
 }
 
 void Player::startMovingRight() {
 	direction = DIRECTION::RIGHT;
+	flipped = false;
 	is_moving_right = true;
 }
 

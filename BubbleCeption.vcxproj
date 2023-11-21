@@ -141,6 +141,8 @@
     <ClCompile Include="src\Asset\MapAsset.cpp" />
     <ClCompile Include="src\Asset\MaterialAsset.cpp" />
     <ClCompile Include="src\Asset\OBJAsset.cpp" />
+    <ClCompile Include="src\Entity\Enemy.cpp" />
+    <ClCompile Include="src\Entity\Entity2D.cpp" />
     <ClCompile Include="src\Entity\EntityPhysics.cpp" />
     <ClCompile Include="src\Entity\Player.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -169,7 +171,9 @@
     <ClInclude Include="src\Asset\MaterialAsset.h" />
     <ClInclude Include="src\Asset\OBJAsset.h" />
     <ClInclude Include="src\Constants.h" />
+    <ClInclude Include="src\Entity\Enemy.h" />
     <ClInclude Include="src\Entity\Entity.h" />
+    <ClInclude Include="src\Entity\Entity2D.h" />
     <ClInclude Include="src\Entity\EntityPhysics.h" />
     <ClInclude Include="src\Entity\Player.h" />
     <ClInclude Include="src\Game.h" />

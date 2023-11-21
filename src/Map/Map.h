@@ -21,6 +21,7 @@ public:
 
 	void setTile(IGame& game_interface, Tile* tile);
 	std::optional<Tile const*> getTile(Vector3<int> pos) const;
+	bool hasTile(Vector3<int> pos) const;
 
 private:
 	int width;

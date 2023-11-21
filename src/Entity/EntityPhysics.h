@@ -12,5 +12,5 @@ public:
 
 	Rect<float> getWorldHitbox() const;
 
-	void idle(float t) override;
+	virtual void idle(float t) override;
 };

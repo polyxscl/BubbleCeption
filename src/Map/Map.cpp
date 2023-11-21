@@ -65,3 +65,7 @@ std::optional<Tile const*> Map::getTile(Vector3<int> pos) const {
 	else
 		return it->second;
 }
+
+bool Map::hasTile(Vector3<int> pos) const {
+	return data.find(pos) != data.end();
+}
