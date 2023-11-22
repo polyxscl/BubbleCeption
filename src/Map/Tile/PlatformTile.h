@@ -10,7 +10,7 @@ public:
 	void clear(IGame& game_interface) override;
 	void idle(float t) override;
 
-	bool isCollision(Entity* entity) const override;
-	void onCollision(Entity* entity) override;
+	bool isCollision(IEntityPhysics* ep) const override;
+	void onCollision(IEntityPhysics* ep) override;
 
 };

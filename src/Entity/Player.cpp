@@ -3,7 +3,7 @@
 #include "Constants.h"
 #include "Player.h"
 
-void Player::init(IGame& game_interface) {
+void Player::init(IGame& game_interface, Map& map) {
 	is_visible = true;
 	size = Vector3<float>(1.0f, 1.0f);
 
@@ -15,7 +15,7 @@ void Player::init(IGame& game_interface) {
 	texture = asset_manager.getImageAsset("player");
 }
 
-void Player::idle(float t) {
+void Player::idle(float t, Map& map) {
 	if (is_moving_left && is_moving_right) {
 		vel.x = 0.f;
 	}
@@ -29,7 +29,7 @@ void Player::idle(float t) {
 		vel.x = 0.f;
 	}
 
-	EntityPhysics::idle(t);
+	EntityPhysics::idle(t, map);
 	vel.y = std::max(vel.y, -10.f);
 
 	if (pos.y < -size.y)

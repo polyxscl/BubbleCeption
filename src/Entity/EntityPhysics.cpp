@@ -1,6 +1,6 @@
 #include "EntityPhysics.h"
 
-void EntityPhysics::idle(float t) {
+void EntityPhysics::idle(float t, Map& map) {
 	vel += accel * t;
 	pos += vel * t;
 }

@@ -8,15 +8,12 @@ public:
 	Enemy()
 		: Entity2D(), EntityPhysics() {}
 
-	void init(IGame& game_interface) override;
-	void idle(float t) override;
+	void init(IGame& game_interface, Map& map) override;
+	void idle(float t, Map& map) override;
 	void draw() override;
 
 private:
-	bool is_visible = true;
-	Vector3<float> size;
-	std::shared_ptr<ImageAsset> texture;
-
+	float alive_time = 0;
 	enum class DIRECTION { LEFT, RIGHT } direction = DIRECTION::LEFT;
 
 };

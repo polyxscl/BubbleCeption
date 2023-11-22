@@ -2,15 +2,12 @@
 
 #include "Util/Rect.h"
 #include "Entity/Entity.h"
+#include "EntityPhysics.interface.h"
 
 // An abstract entity class for physics.
-class EntityPhysics : virtual public Entity {
+class EntityPhysics : virtual public IEntityPhysics, virtual public Entity {
 public:
-	bool is_moving = false;
-	Vector3<float> vel, accel;
-	Rect<float> hitbox;
+	Rect<float> getWorldHitbox() const override;
 
-	Rect<float> getWorldHitbox() const;
-
-	virtual void idle(float t) override;
+	virtual void idle(float t, Map& map) override;
 };

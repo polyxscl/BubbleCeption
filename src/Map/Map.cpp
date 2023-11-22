@@ -46,10 +46,10 @@ void Map::draw(const Camera& camera) const {
 }
 
 
-void Map::handleCollision(Entity* entity) {
+void Map::handleCollision(IEntityPhysics* ep) {
 	for (auto& [pos, tile] : data) {
-		if (tile->isCollision(entity))
-			tile->onCollision(entity);
+		if (tile->isCollision(ep))
+			tile->onCollision(ep);
 	}
 }
 
