@@ -143,8 +143,10 @@
     <ClCompile Include="src\Asset\MapAsset.cpp" />
     <ClCompile Include="src\Asset\MaterialAsset.cpp" />
     <ClCompile Include="src\Asset\OBJAsset.cpp" />
+    <ClCompile Include="src\Entity\Bubble.cpp" />
     <ClCompile Include="src\Entity\Enemy.cpp" />
     <ClCompile Include="src\Entity\Entity2D.cpp" />
+    <ClCompile Include="src\Entity\Entity3D.cpp" />
     <ClCompile Include="src\Entity\EntityPhysics.cpp" />
     <ClCompile Include="src\Entity\Player.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -156,6 +158,7 @@
     <ClCompile Include="src\Map\Tile\PlatformTile.cpp" />
     <ClCompile Include="src\Map\Tile\SolidTile.cpp" />
     <ClCompile Include="src\Map\Tile\Tile.cpp" />
+    <ClCompile Include="src\Render\SphereModel.cpp" />
     <ClCompile Include="src\Scene\Camera.cpp" />
     <ClCompile Include="src\Scene\GameScene.cpp" />
     <ClCompile Include="src\Scene\LoadingScene.cpp" />
@@ -173,10 +176,12 @@
     <ClInclude Include="src\Asset\MaterialAsset.h" />
     <ClInclude Include="src\Asset\OBJAsset.h" />
     <ClInclude Include="src\Constants.h" />
+    <ClInclude Include="src\Entity\Bubble.h" />
     <ClInclude Include="src\Entity\Enemy.h" />
     <ClInclude Include="src\Entity\Entity.h" />
     <ClInclude Include="src\Entity\Entity.interface.h" />
     <ClInclude Include="src\Entity\Entity2D.h" />
+    <ClInclude Include="src\Entity\Entity3D.h" />
     <ClInclude Include="src\Entity\EntityPhysics.h" />
     <ClInclude Include="src\Entity\EntityPhysics.interface.h" />
     <ClInclude Include="src\Entity\Player.h" />
@@ -187,6 +192,8 @@
     <ClInclude Include="src\Map\Tile\PlatformTile.h" />
     <ClInclude Include="src\Map\Tile\SolidTile.h" />
     <ClInclude Include="src\Map\Tile\Tile.h" />
+    <ClInclude Include="src\Render\Model.h" />
+    <ClInclude Include="src\Render\SphereModel.h" />
     <ClInclude Include="src\Scene\Camera.h" />
     <ClInclude Include="src\Scene\GameScene.h" />
     <ClInclude Include="src\Scene\LoadingScene.h" />
