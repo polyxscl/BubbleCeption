@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Util/Rect.h"
-#include "Entity/Entity.h"
+#include "Entity/EntityPhysics.interface.h"
 #include "Scene/Camera.h"
 #include "Game.interface.h"
 
@@ -15,18 +15,18 @@ public:
 	virtual void draw(const Camera& camera);
 	virtual void idle(float t) {};
 
-	virtual bool isCollision(Entity* entity) const { return false; };
-	virtual void onCollision(Entity* entity) {};
+	virtual bool isCollision(IEntityPhysics* ep) const { return false; };
+	virtual void onCollision(IEntityPhysics* ep) {};
 
 	Rect<float> getWorldHitbox() const;
 
 	const Vector3<int> pos;
-	Rect<float> hitbox;
 
 	bool collidable;
 	bool visible;
 
 protected:
 	std::shared_ptr<ImageAsset> texture;
-	
+	Rect<float> hitbox;
+
 };

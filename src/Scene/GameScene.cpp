@@ -7,9 +7,7 @@
 using namespace std::placeholders;
 
 void GameScene::init(IGame& game_interface) {
-	player.init(game_interface);
-
-	auto& input_manager = game_interface.getIInputManager();
+auto& input_manager = game_interface.getIInputManager();
 	input_manager.attachKeyPressCallback(
 		"gs_key",
 		std::bind(&GameScene::keyPressCallback, this, _1, _2)
@@ -23,10 +21,19 @@ void GameScene::init(IGame& game_interface) {
 	map = new Map();
 	map->loadFromMapAsset(game_interface, asset_manager.getMapAsset("level1"));
 
+	player.init(game_interface, *map);
+
 	camera.setViewportSize(Vector2<float>(SCREEN_WIDTH, SCREEN_HEIGHT));
 	camera.setCenter(Vector3<float>(SCREEN_WIDTH / 2.f - 0.5f, SCREEN_HEIGHT / 2, 0.0f));
 
 	player.pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
+
+	auto enemy = new Enemy();
+
+	enemy->init(game_interface, *map);
+	enemy->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
+
+	enemies.emplace("1", enemy);
 }
 
 void GameScene::clear(IGame& game_interface) {
@@ -34,12 +41,22 @@ void GameScene::clear(IGame& game_interface) {
 	input_manager.detachSpecialKeyPressCallback("gs_spkey");
 	input_manager.detachKeyPressCallback("gs_key");
 
+	for (auto& [id, enemy] : enemies) {
+		delete enemy;
+	}
+	enemies.clear();
+
 	delete map;
 }
 
 void GameScene::idle(IGame& game_interface, float t) {
-	player.idle(t);
+	player.idle(t, *map);
 	map->handleCollision(&player);
+
+	for (auto& [id, enemy] : enemies) {
+		enemy->idle(t, *map);
+		map->handleCollision(enemy);
+	}
 }
 
 void GameScene::draw(IGame& game_interface) {
@@ -59,6 +76,10 @@ void GameScene::draw(IGame& game_interface) {
 	if (map)
 		map->draw(camera);
 	player.draw();
+
+	for (auto& [id, enemy] : enemies) {
+		enemy->draw();
+	}
 }
 
 void GameScene::keyPressCallback(IInputManager& interface, const InputKeyboard& input) {

@@ -7,8 +7,8 @@ class Player : virtual public Entity2D, virtual public EntityPhysics {
 public:
 	Player() {}
 
-	void init(IGame& game_interface) override;
-	void idle(float t) override;
+	void init(IGame& game_interface, Map& map) override;
+	void idle(float t, Map& map) override;
 	void draw() override;
 	 
 	void startMovingLeft();

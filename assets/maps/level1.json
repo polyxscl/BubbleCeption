@@ -266,6 +266,46 @@
         {
             "id": "SOLID",
             "pos": [19, 14]
+        },
+        {
+            "id": "PLATFORM",
+            "pos": [5, 3]
+        },
+        {
+            "id": "PLATFORM",
+            "pos": [6, 3]
+        },
+        {
+            "id": "PLATFORM",
+            "pos": [7, 3]
+        },
+        {
+            "id": "PLATFORM",
+            "pos": [8, 3]
+        },
+        {
+            "id": "PLATFORM",
+            "pos": [9, 3]
+        },
+        {
+            "id": "PLATFORM",
+            "pos": [10, 3]
+        },
+        {
+            "id": "PLATFORM",
+            "pos": [11, 3]
+        },
+        {
+            "id": "PLATFORM",
+            "pos": [12, 3]
+        },
+        {
+            "id": "PLATFORM",
+            "pos": [13, 3]
+        },
+        {
+            "id": "PLATFORM",
+            "pos": [14, 3]
         }
     ]
 }

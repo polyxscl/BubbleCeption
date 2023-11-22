@@ -6,6 +6,7 @@
 #include "Util/Vector.h"
 #include "Map/Tile/Tile.h"
 #include "Asset/MapAsset.h"
+#include "Entity/EntityPhysics.interface.h"
 
 class Map {
 public:
@@ -17,7 +18,7 @@ public:
 	void loadFromMapAsset(IGame& game_interface, std::shared_ptr<MapAsset> map_asset);
 
 	void draw(const Camera& camera) const;
-	void handleCollision(Entity* entity);
+	void handleCollision(IEntityPhysics* ep);
 
 	void setTile(IGame& game_interface, Tile* tile);
 	std::optional<Tile const*> getTile(Vector3<int> pos) const;
