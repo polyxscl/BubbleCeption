@@ -2,10 +2,15 @@
 #include <thread> // for demonstration purposes
 
 AudioAsset::AudioAsset(std::string id, const fs::path& file_path)
-    : Asset(id, file_path), playing(false) {}
+    : Asset(id, file_path), playing(false) {
+    std::string Path = file_path.string();
+    if (!this->music.openFromFile(Path)) {
+        std::cerr << "Failed to load music file: " << Path << std::endl;
+    }
+}
 
 AudioAsset::~AudioAsset() {
-    stop(); // Ensure audio is stopped before destruction (cleanup).
+    stop(); 
 }
 
 void AudioAsset::load() {
@@ -41,3 +46,61 @@ void AudioAsset::stop() {
     // Here, we just update the playing flag (replace this with actual stopping code).
     playing = false;
 }
+
+/*
+int main() {
+    // MP3 파일 경로
+    std::string filePath = "path/to/your/song.mp3";
+
+    // 노래를 로드합니다.
+    sf::Music music;
+    if (!music.openFromFile(filePath)) {
+        std::cerr << "Failed to load music file: " << filePath << std::endl;
+        return 1;
+    }
+
+    // 노래를 재생합니다.
+    music.play();
+
+    // 여기에 다른 작업을 추가할 수 있습니다.
+
+    // 일정 시간 대기 후 노래를 멈춥니다.
+    sf::sleep(sf::seconds(10)); // 10초 동안 대기
+
+    // 노래를 멈춥니다.
+    music.stop();
+
+    return 0;
+}
+*/
+
+/*
+int main() {
+    // MP3 파일 경로
+    std::string filePath = "path/to/your/song.mp3";
+
+    // 노래를 로드합니다.
+    sf::Music music;
+    if (!music.openFromFile(filePath)) {
+        std::cerr << "Failed to load music file: " << filePath << std::endl;
+        return 1;
+    }
+
+    // 시작 시간을 5초로 설정합니다.
+    sf::Time startTime = sf::seconds(5.0f);
+    music.setPlayingOffset(startTime);
+
+    // 노래를 재생합니다.
+    music.play();
+
+    // 여기에 다른 작업을 추가할 수 있습니다.
+
+    // 일정 시간 동안 대기한 후 노래를 멈춥니다.
+    sf::sleep(sf::seconds(10)); // 10초 동안 대기
+
+    // 노래를 멈춥니다.
+    music.stop();
+
+    return 0;
+}
+*/

@@ -2,6 +2,8 @@
 
 #include "Asset.h"
 #include <iostream>
+#include <string>
+#include <SFML/Audio.hpp>
 
 class AudioAsset : public Asset {
 public:
@@ -13,7 +15,6 @@ public:
     void stop();
 
 private:
-    // Additional members for handling audio playback can be added here
-    // (e.g., using a third-party audio library).
+    sf::Music music;
     bool playing;
 };
