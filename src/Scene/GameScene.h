@@ -1,6 +1,6 @@
 #pragma once
 
-#include <unordered_map>
+#include <unordered_set>
 
 #include "Scene.h"
 #include "Entity/Player.h"
@@ -19,10 +19,11 @@ public:
 	void specialKeyPressCallback(IInputManager& interface, const InputKeyboardSpecial& input);
 
 private:
-	Player player;
+	Player* player;
 	Camera camera;
 	Map* map;
+	IGame* game;
 
-	std::unordered_map<std::string, Enemy*> enemies;
-
+	std::unordered_set<Enemy*> enemies;
+	std::unordered_set<Bubble*> bubbles;
 };

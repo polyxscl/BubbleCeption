@@ -3,7 +3,8 @@
 
 #include "Enemy.h"
 
-void Enemy::init(IGame& game_interface, Map& map) {
+Enemy::Enemy(IGame& game_interface, Map& map)
+	: Entity(game_interface, map), Entity2D(game_interface, map), EntityPhysics(game_interface, map) {
 	is_visible = true;
 	size = Vector3<float>(1.0f, 1.0f);
 
@@ -18,18 +19,18 @@ void Enemy::init(IGame& game_interface, Map& map) {
 void Enemy::idle(float t, Map& map) {
 	alive_time += t;
 
-	if (direction == DIRECTION::LEFT) {
+	if (direction == Direction::LEFT) {
 		if (!map.hasTile(pos + Vector3<float>(0.0f, -0.5f, 0.0f))) {
-			direction = DIRECTION::RIGHT;
+			direction = Direction::RIGHT;
 		}
 	}
 	else {
 		if (!map.hasTile(pos + Vector3<float>(1.0f, -0.5f, 0.0f))) {
-			direction = DIRECTION::LEFT;
+			direction = Direction::LEFT;
 		}
 	}
 
-	if (direction == DIRECTION::LEFT) {
+	if (direction == Direction::LEFT) {
 		vel.x = -5.0f;
 	}
 	else {

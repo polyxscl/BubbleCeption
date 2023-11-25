@@ -2,6 +2,7 @@
 
 namespace fs = std::filesystem;
 
+std::string MaterialAsset::prev_id = "";
 Logger MaterialAsset::logger("MaterialAsset");
 
 void MaterialAsset::load() {
@@ -119,6 +120,8 @@ const float* MaterialAsset::get_shininess() const {
 }
 
 void MaterialAsset::apply() const {
+	if (prev_id == id) return;
+	prev_id = id;
 	glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 	glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);

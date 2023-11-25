@@ -200,6 +200,7 @@
     <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Scene\SceneManager.h" />
     <ClInclude Include="src\Scene\SceneManager.interface.h" />
+    <ClInclude Include="src\Util\Direction.h" />
     <ClInclude Include="src\Util\Logger.h" />
     <ClInclude Include="src\Util\Rect.h" />
     <ClInclude Include="src\Util\Vector.h" />
