@@ -3,7 +3,8 @@
 #include "Constants.h"
 #include "Player.h"
 
-void Player::init(IGame& game_interface, Map& map) {
+Player::Player(IGame& game_interface, Map& map)
+	: Entity(game_interface, map), Entity2D(game_interface, map), EntityPhysics(game_interface, map) {
 	is_visible = true;
 	size = Vector3<float>(1.0f, 1.0f);
 
@@ -43,13 +44,13 @@ void Player::draw() {
 }
 
 void Player::startMovingLeft() {
-	direction = DIRECTION::LEFT;
+	direction = Direction::LEFT;
 	flipped = true;
 	is_moving_left = true;
 }
 
 void Player::startMovingRight() {
-	direction = DIRECTION::RIGHT;
+	direction = Direction::RIGHT;
 	flipped = false;
 	is_moving_right = true;
 }
@@ -64,4 +65,23 @@ void Player::stopMovingRight() {
 
 void Player::jump() {
 	vel.y = 12.f;
+}
+
+Bubble* Player::shootBubble(IGame& game_interface, Map& map) {
+	auto bubble = new Bubble(game_interface, map);
+
+	bubble->pos = this->pos;
+	bubble->direction = this->direction;
+	if (this->direction == Direction::LEFT) {
+		bubble->vel.x = -5.0f;
+		bubble->vel.y = 3.0f;
+		bubble->accel.x = 2.5f;
+	}
+	else if (this->direction == Direction::RIGHT) {
+		bubble->vel.x = 5.0f;
+		bubble->vel.y = 3.0f;
+		bubble->accel.x = -2.5f;
+	}
+
+	return bubble;
 }

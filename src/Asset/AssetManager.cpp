@@ -75,6 +75,7 @@ void AssetManager::loadAssets(const fs::path& directory) {
 	logger << "Found " << count << " assets." << logger.info;
 
 	// Initialize placeholder assets
+	// ImageAsset
 
 	GLubyte* null_image_data = new GLubyte[4 * 16 * 16]();
 	for (int i = 0; i < 16; ++i) {
@@ -93,9 +94,20 @@ void AssetManager::loadAssets(const fs::path& directory) {
 		}
 	}
 
-	auto ptr = std::make_shared<ImageAsset>("null");
-	ptr->fromRawRGBA8(16, 16, null_image_data);
-	images.emplace("null", ptr);
+	auto image_ptr = std::make_shared<ImageAsset>("null");
+	image_ptr->fromRawRGBA8(16, 16, null_image_data);
+	images.emplace("null", image_ptr);
+
+	// MaterialAsset
+
+	auto material_ptr = std::make_shared<MaterialAsset>("null");
+	material_ptr->set_ambient(0.05f, 0.05f, 0.05f, 1.0f);
+	material_ptr->set_diffuse(0.5f, 0.5f, 0.5f, 1.0f);
+	material_ptr->set_emission(0.0f, 0.0f, 0.0f, 1.0f);
+	material_ptr->set_specular(0.7f, 0.7f, 0.7f, 1.0f);
+	material_ptr->set_shininess(0.78125f);
+	materials.emplace("null", material_ptr);
+
 }
 
 std::shared_ptr<ImageAsset> AssetManager::getImageAsset(std::string id) {
@@ -112,7 +124,7 @@ std::shared_ptr<MaterialAsset> AssetManager::getMaterialAsset(std::string id) {
 		return materials[id];
 	else {
 		logger << "Failed to retrieve MaterialAsset of id " << id << " - returning nullptr..." << logger.warn;
-		return nullptr;
+		return materials["null"];
 	}
 }
 

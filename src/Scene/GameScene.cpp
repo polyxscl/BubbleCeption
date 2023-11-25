@@ -21,19 +21,20 @@ auto& input_manager = game_interface.getIInputManager();
 	map = new Map();
 	map->loadFromMapAsset(game_interface, asset_manager.getMapAsset("level1"));
 
-	player.init(game_interface, *map);
+	player = new Player(game_interface, *map);
 
 	camera.setViewportSize(Vector2<float>(SCREEN_WIDTH, SCREEN_HEIGHT));
 	camera.setCenter(Vector3<float>(SCREEN_WIDTH / 2.f - 0.5f, SCREEN_HEIGHT / 2, 0.0f));
 
-	player.pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
+	player->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
 
-	auto enemy = new Enemy();
+	auto enemy = new Enemy(game_interface, *map);
 
-	enemy->init(game_interface, *map);
 	enemy->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
 
-	enemies.emplace("1", enemy);
+	enemies.emplace(enemy);
+
+	game = &game_interface;
 }
 
 void GameScene::clear(IGame& game_interface) {
@@ -41,22 +42,42 @@ void GameScene::clear(IGame& game_interface) {
 	input_manager.detachSpecialKeyPressCallback("gs_spkey");
 	input_manager.detachKeyPressCallback("gs_key");
 
-	for (auto& [id, enemy] : enemies) {
+	for (auto& enemy : enemies) {
 		delete enemy;
 	}
 	enemies.clear();
+
+	for (auto& bubble : bubbles) {
+		delete bubble;
+	}
+	bubbles.clear();
 
 	delete map;
 }
 
 void GameScene::idle(IGame& game_interface, float t) {
-	player.idle(t, *map);
-	map->handleCollision(&player);
-
-	for (auto& [id, enemy] : enemies) {
+	player->idle(t, *map);
+	map->handleCollision(player);
+	
+	for (auto it = enemies.begin(); it != enemies.end();) {
+		auto enemy = *it;
 		enemy->idle(t, *map);
 		map->handleCollision(enemy);
+		if (!enemy->alive)
+			it = enemies.erase(it);
+		else
+			++it;
 	}
+
+	for (auto it = bubbles.begin(); it != bubbles.end();) {
+		auto bubble = *it;
+		bubble->idle(t, *map);
+		if (!bubble->alive)
+			it = bubbles.erase(it);
+		else
+			++it;
+	}
+
 }
 
 void GameScene::draw(IGame& game_interface) {
@@ -75,10 +96,14 @@ void GameScene::draw(IGame& game_interface) {
 
 	if (map)
 		map->draw(camera);
-	player.draw();
+	player->draw();
 
-	for (auto& [id, enemy] : enemies) {
+	for (auto& enemy : enemies) {
 		enemy->draw();
+	}
+
+	for (auto& bubble : bubbles) {
+		bubble->draw();
 	}
 }
 
@@ -86,25 +111,30 @@ void GameScene::keyPressCallback(IInputManager& interface, const InputKeyboard& 
 	switch (input.key) {
 	case 'a':
 		if (!input.was_down && input.down) {
-			player.startMovingLeft();
+			player->startMovingLeft();
 		}
 		else if (!input.down) {
-			player.stopMovingLeft();
+			player->stopMovingLeft();
 		}
 		break;
 	case 'd':
 		if (!input.was_down && input.down) {
-			player.startMovingRight();
+			player->startMovingRight();
 		}
 		else if (!input.down) {
-			player.stopMovingRight();
+			player->stopMovingRight();
 		}
 		break;
 	case 'w':
 		if (!input.was_down && input.down) {
-			player.jump();
+			player->jump();
 		}
 		break;
+	case ' ':
+		if (!input.was_down && input.down) {
+			auto bubble = player->shootBubble(*game, *map);
+			bubbles.emplace(bubble);
+		}
 	}
 }
 

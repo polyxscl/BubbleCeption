@@ -35,5 +35,7 @@ private:
 	float specular[4];
 	float shininess[1];
 
+	static std::string prev_id;
+
 	static Logger logger;
 };

@@ -4,6 +4,8 @@
 
 class Entity2D : virtual public Entity {
 public:
+	using Entity::Entity;
+
 	virtual void draw() override;
 
 protected:
