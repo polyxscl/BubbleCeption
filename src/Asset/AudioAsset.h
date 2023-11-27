@@ -1,5 +1,10 @@
 #pragma once
+#include <string>
+#include <sstream>
+
 #include "Asset/Asset.h"
+#include "Util/Logger.h"
+
 #include <miniaudio.h>
 #include <iostream>
 
@@ -20,4 +25,6 @@ private:
 	AudioType type;
 	ma_decoder decoder;
 	ma_device device;
+
+	static Logger logger;
 };

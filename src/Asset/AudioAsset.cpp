@@ -1,10 +1,19 @@
 #include "Asset/AudioAsset.h"
 
+ma_uint32 AudioAsset::data_callback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
+    AudioAsset* pAudioAsset = static_cast<AudioAsset*>(pDevice->pUserData);
+    if (pAudioAsset == nullptr) {
+        return 0;
+    }
+    return ma_decoder_read_pcm_frames(&pAudioAsset->decoder, pOutput, frameCount, nullptr);
+}
+
 void AudioAsset::load() {
     ma_result result = ma_decoder_init_file(file_path.string().c_str(), NULL, &decoder);
     if (result != MA_SUCCESS) {
-        std::cerr << "Failed to load audio file: " << file_path << std::endl;
-        this->valid = false;
+        logger << "Failed to load audio @ " << file_path << logger.info;
+        valid = false;
+        return;
     }
     if (valid) {
         ma_decoder_seek_to_pcm_frame(&decoder, 0);
@@ -13,12 +22,12 @@ void AudioAsset::load() {
         deviceConfig.playback.format = decoder.outputFormat;
         deviceConfig.playback.channels = decoder.outputChannels;
         deviceConfig.sampleRate = decoder.outputSampleRate;
-        deviceConfig.dataCallback = AudioAsset::data_callback;
+        deviceConfig.dataCallback = data_callback;
         deviceConfig.pUserData = this;
 
         ma_result result = ma_device_init(NULL, &deviceConfig, &device);
         if (result != MA_SUCCESS) {
-            std::cerr << "Failed to initialize playback device" << std::endl;
+            logger << "Failed to initialize audio @ " << file_path << logger.info;
             valid = false;
             return;
         }
@@ -33,7 +42,7 @@ void AudioAsset::play() {
         else {
             ma_result result = ma_device_start(&device);
             if (result != MA_SUCCESS) {
-                std::cerr << "Failed to start playback device" << std::endl;
+                logger << "Failed to initialize audio @ " << file_path << logger.info;
                 valid = false;
                 return;
             }
@@ -65,10 +74,3 @@ AudioAsset::~AudioAsset() {
     }
 }
 
-ma_uint32 AudioAsset::data_callback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
-   AudioAsset* pAudioAsset = static_cast<AudioAsset*>(pDevice->pUserData);
-        if (pAudioAsset == nullptr) {
-            return 0;
-        }
-   return ma_decoder_read_pcm_frames(&pAudioAsset->decoder, pOutput, frameCount, nullptr);
-}
