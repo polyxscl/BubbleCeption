@@ -1,7 +1,13 @@
 #include <algorithm>
+#include <ctime>
+#include <random>
 
 #include "Constants.h"
 #include "Player.h"
+
+static std::mt19937 engine(time(0));
+static std::uniform_real_distribution<float> bubble_vel_dist(-0.5f, 0.5f);
+static auto bubble_vel_gen = std::bind(bubble_vel_dist, engine);
 
 Player::Player(IGame& game_interface, Map& map)
 	: Entity(game_interface, map), Entity2D(game_interface, map), EntityPhysics(game_interface, map) {
@@ -72,15 +78,20 @@ Bubble* Player::shootBubble(IGame& game_interface, Map& map) {
 
 	bubble->pos = this->pos;
 	bubble->direction = this->direction;
+	auto term_vel = bubble_vel_gen();
 	if (this->direction == Direction::LEFT) {
-		bubble->vel.x = -5.0f;
-		bubble->vel.y = 3.0f;
-		bubble->accel.x = 2.5f;
+		bubble->vel.x = -10.0f;
+		bubble->vel.y = -1.0f;
+		bubble->terminal_vel.x = term_vel;
+		bubble->accel.x = 20.0f;
+		bubble->accel.y = 6.0f;
 	}
 	else if (this->direction == Direction::RIGHT) {
-		bubble->vel.x = 5.0f;
-		bubble->vel.y = 3.0f;
-		bubble->accel.x = -2.5f;
+		bubble->vel.x = 10.0f;
+		bubble->vel.y = -1.0f;
+		bubble->terminal_vel.x = term_vel;
+		bubble->accel.x = -20.0f;
+		bubble->accel.y = 6.0f;
 	}
 
 	return bubble;

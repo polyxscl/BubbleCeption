@@ -123,6 +123,18 @@ public:
         return x * other.x + y * other.y;
     }
 
+    // Distance
+    T dist(const Vector2& other) const {
+        auto dx = other.x - x;
+        auto dy = other.y - y;
+        return std::sqrt(dx * dx + dy * dy);
+    }
+
+    // Size
+    T size() const {
+        return std::sqrt(x * x + y * y);
+    }
+
     // STRING //
 
     friend std::ostream& operator<<(std::ostream& os, const Vector2& obj) {
@@ -250,6 +262,19 @@ public:
         );
     }
 
+    // Distance
+    T dist(const Vector3& other) const {
+        auto dx = other.x - x;
+        auto dy = other.y - y;
+        auto dz = other.z - z;
+        return std::sqrt(dx * dx + dy * dy + dz * dz);
+    }
+
+    // Size
+    T size() const {
+        return std::sqrt(x * x + y * y + z * z);
+    }
+
     // STRING //
     friend std::ostream& operator<<(std::ostream& os, const Vector3& obj) {
         os << "Vector3(" << obj.x << ", " << obj.y << ", " << obj.z << ")";
@@ -371,6 +396,20 @@ public:
     // Dot product
     float dot(const Vector4& other) const {
         return x * other.x + y * other.y + z * other.z + w * other.w;
+    }
+
+    // Distance
+    T dist(const Vector4& other) const {
+        auto dx = other.x - x;
+        auto dy = other.y - y;
+        auto dz = other.z - z;
+        auto dw = other.w - w;
+        return std::sqrt(dx * dx + dy * dy + dz * dz + dw * dw);
+    }
+
+    // Size
+    T size() const {
+        return std::sqrt(x * x + y * y + z * z + w * w);
     }
 
     // STRING //

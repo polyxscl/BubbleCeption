@@ -2,6 +2,7 @@
 
 #include "Entity/Entity3D.h"
 #include "Entity/EntityPhysics.h"
+#include "Entity/Enemy.h"
 #include "Util/Direction.h"
 #include "Render/SphereModel.h"
 
@@ -14,10 +15,20 @@ public:
 	void idle(float t, Map& map) override;
 	void draw() override;
 
+	void onCollision(Enemy* enemy);
+	bool isCollision(Enemy* enemy);
+
+	void onCollision(Bubble* bubble);
+	bool isCollision(Bubble* bubble);
+
 	Direction direction = Direction::LEFT;
 	
+	Vector3<float> terminal_vel;
+
 private:
 	float time = 0;
+	bool fully_blown = false;
+	Enemy* captured_enemy = nullptr;
 
 	SphereModel* sphere_model;
 

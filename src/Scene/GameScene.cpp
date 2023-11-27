@@ -63,8 +63,17 @@ void GameScene::idle(IGame& game_interface, float t) {
 		auto enemy = *it;
 		enemy->idle(t, *map);
 		map->handleCollision(enemy);
-		if (!enemy->alive)
+
+		for (auto& bubble : bubbles) {
+			if (bubble->isCollision(enemy)) {
+				bubble->onCollision(enemy);
+			}
+		}
+
+		if (!enemy->alive) {
+			delete enemy;
 			it = enemies.erase(it);
+		} 
 		else
 			++it;
 	}
@@ -72,12 +81,27 @@ void GameScene::idle(IGame& game_interface, float t) {
 	for (auto it = bubbles.begin(); it != bubbles.end();) {
 		auto bubble = *it;
 		bubble->idle(t, *map);
-		if (!bubble->alive)
+
+		if (!bubble->alive) {
+			delete bubble;
 			it = bubbles.erase(it);
+		}
 		else
 			++it;
 	}
 
+	for (auto i1 = bubbles.begin(); i1 != bubbles.end(); ++i1) {
+		auto i2 = i1;
+		while (true) {
+			++i2;
+			if (i2 == bubbles.end()) break;
+			auto b1 = *i1;
+			auto b2 = *i2;
+			if (b1->isCollision(b2)) {
+				b1->onCollision(b2);
+			}
+		}
+	}
 }
 
 void GameScene::draw(IGame& game_interface) {
@@ -132,8 +156,10 @@ void GameScene::keyPressCallback(IInputManager& interface, const InputKeyboard& 
 		break;
 	case ' ':
 		if (!input.was_down && input.down) {
-			auto bubble = player->shootBubble(*game, *map);
-			bubbles.emplace(bubble);
+			if (bubbles.size() < 25) {
+				auto bubble = player->shootBubble(*game, *map);
+				bubbles.emplace(bubble);
+			}
 		}
 	}
 }

@@ -5,4 +5,5 @@
 class IEntity {
 public:
 	Vector3<float> pos;
+
 };

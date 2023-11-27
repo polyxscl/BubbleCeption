@@ -10,9 +10,12 @@ public:
 
 	void idle(float t, Map& map) override;
 	void draw() override;
+	
+	bool captured = false;
 
 private:
 	float alive_time = 0;
+
 	Direction direction = Direction::LEFT;
 
 };
