@@ -1,4 +1,6 @@
-#include "Asset/AudioAsset.h"
+#include "AudioAsset.h"
+
+Logger AudioAsset::logger("AudioAsset");
 
 ma_uint32 AudioAsset::data_callback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
     AudioAsset* pAudioAsset = static_cast<AudioAsset*>(pDevice->pUserData);
@@ -9,28 +11,26 @@ ma_uint32 AudioAsset::data_callback(ma_device* pDevice, void* pOutput, const voi
 }
 
 void AudioAsset::load() {
-    ma_result result = ma_decoder_init_file(file_path.string().c_str(), NULL, &decoder);
-    if (result != MA_SUCCESS) {
-        logger << "Failed to load audio @ " << file_path << logger.info;
+    ma_result file_result = ma_decoder_init_file(file_path.string().c_str(), NULL, &decoder);
+    if (file_result != MA_SUCCESS) {
+        logger << "Failed to load audio @ " << file_path << logger.error;
         valid = false;
         return;
     }
-    if (valid) {
-        ma_decoder_seek_to_pcm_frame(&decoder, 0);
+    ma_decoder_seek_to_pcm_frame(&decoder, 0);
 
-        ma_device_config deviceConfig = ma_device_config_init(ma_device_type_playback);
-        deviceConfig.playback.format = decoder.outputFormat;
-        deviceConfig.playback.channels = decoder.outputChannels;
-        deviceConfig.sampleRate = decoder.outputSampleRate;
-        deviceConfig.dataCallback = data_callback;
-        deviceConfig.pUserData = this;
+    ma_device_config deviceConfig = ma_device_config_init(ma_device_type_playback);
+    deviceConfig.playback.format = decoder.outputFormat;
+    deviceConfig.playback.channels = decoder.outputChannels;
+    deviceConfig.sampleRate = decoder.outputSampleRate;
+    deviceConfig.dataCallback = (ma_device_data_proc) data_callback;
+    deviceConfig.pUserData = this;
 
-        ma_result result = ma_device_init(NULL, &deviceConfig, &device);
-        if (result != MA_SUCCESS) {
-            logger << "Failed to initialize audio @ " << file_path << logger.info;
-            valid = false;
-            return;
-        }
+    ma_result device_init_result = ma_device_init(NULL, &deviceConfig, &device);
+    if (device_init_result != MA_SUCCESS) {
+        logger << "Failed to initialize audio @ " << file_path << logger.error;
+        valid = false;
+        return;
     }
 }
 
@@ -42,7 +42,7 @@ void AudioAsset::play() {
         else {
             ma_result result = ma_device_start(&device);
             if (result != MA_SUCCESS) {
-                logger << "Failed to initialize audio @ " << file_path << logger.info;
+                logger << "Failed to initialize audio @ " << file_path << logger.error;
                 valid = false;
                 return;
             }
@@ -61,7 +61,7 @@ void AudioAsset::stop() {
     }
 }
 
-void AudioAsset::setvolume(float v) {
+void AudioAsset::setVolume(float v) {
     this->volume = v;
     ma_device_set_master_volume(&device, this->volume);
 }
@@ -70,7 +70,6 @@ AudioAsset::~AudioAsset() {
     if (valid) {
         this->stop();
         ma_decoder_uninit(&decoder);
-
     }
 }
 
