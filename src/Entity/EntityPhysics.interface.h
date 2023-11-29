@@ -6,6 +6,7 @@
 class IEntityPhysics : virtual public IEntity {
 public:
 	bool is_moving = false;
+	bool is_down = false;
 	Vector3<float> vel, accel;
 	Rect<float> hitbox;
 

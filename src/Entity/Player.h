@@ -16,6 +16,9 @@ public:
 	void startMovingRight();
 	void stopMovingLeft();
 	void stopMovingRight();
+
+	void onCollision(Bubble* bubble);
+	bool isCollision(Bubble* bubble);
 	
 	void jump();
 

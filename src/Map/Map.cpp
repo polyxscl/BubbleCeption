@@ -2,6 +2,7 @@
 
 #include "Map/Tile/SolidTile.h"
 #include "Map/Tile/PlatformTile.h"
+#include "Map/Tile/ConveyorTile.h"
 
 Logger Map::logger("Map");
 
@@ -32,6 +33,16 @@ void Map::loadFromMapAsset(IGame& game_interface, std::shared_ptr<MapAsset> map_
 			setTile(game_interface, new SolidTile(pos));
 		else if (!id.compare("PLATFORM"))
 			setTile(game_interface, new PlatformTile(pos));
+		else if (!id.compare("CONVEYOR_LEFT")) {
+			auto conveyor_tile = new ConveyorTile(pos);
+			conveyor_tile->direction = Direction::LEFT;
+			setTile(game_interface, conveyor_tile);
+		}
+		else if (!id.compare("CONVEYOR_RIGHT")) {
+			auto conveyor_tile = new ConveyorTile(pos);
+			conveyor_tile->direction = Direction::RIGHT;
+			setTile(game_interface, conveyor_tile);
+		}
 		else {
 			logger << "Invalid tile id of " << id << logger.error;
 			logger << "Map was not loaded properly! " << logger.error;

@@ -24,6 +24,8 @@ private:
 	Map* map;
 	IGame* game;
 
+	bool is_jumping = false;
+
 	std::unordered_set<Enemy*> enemies;
 	std::unordered_set<Bubble*> bubbles;
 };

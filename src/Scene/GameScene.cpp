@@ -1,3 +1,5 @@
+#include <deque>
+
 #include "Constants.h"
 #include "GameScene.h"
 
@@ -58,6 +60,21 @@ void GameScene::clear(IGame& game_interface) {
 void GameScene::idle(IGame& game_interface, float t) {
 	player->idle(t, *map);
 	map->handleCollision(player);
+	if (is_jumping) {
+		player->jump();
+	}
+
+	for (auto it = bubbles.begin(); it != bubbles.end();) {
+		auto bubble = *it;
+		bubble->idle(t, *map);
+
+		if (!bubble->alive) {
+			delete bubble;
+			it = bubbles.erase(it);
+		}
+		else
+			++it;
+	}
 	
 	for (auto it = enemies.begin(); it != enemies.end();) {
 		auto enemy = *it;
@@ -78,27 +95,36 @@ void GameScene::idle(IGame& game_interface, float t) {
 			++it;
 	}
 
-	for (auto it = bubbles.begin(); it != bubbles.end();) {
-		auto bubble = *it;
-		bubble->idle(t, *map);
-
-		if (!bubble->alive) {
-			delete bubble;
-			it = bubbles.erase(it);
-		}
-		else
-			++it;
-	}
-
 	for (auto i1 = bubbles.begin(); i1 != bubbles.end(); ++i1) {
 		auto i2 = i1;
+		auto b1 = *i1;
 		while (true) {
 			++i2;
 			if (i2 == bubbles.end()) break;
-			auto b1 = *i1;
 			auto b2 = *i2;
 			if (b1->isCollision(b2)) {
 				b1->onCollision(b2);
+			}
+		}
+		if (player->isCollision(b1)) {
+			player->onCollision(b1);
+
+			std::unordered_set<Bubble*> visited;
+			std::deque<Bubble*> dq;
+			dq.push_back(b1);
+
+			while (!dq.empty()) {
+				auto b2 = dq.front();
+				dq.pop_front();
+				for (auto& b3 : bubbles) {
+					if (visited.find(b3) != visited.end()) continue;
+					if (b2->isCollision(b3)) {
+						dq.push_back(b3);
+					}
+				}
+				b2->killCaptured();
+				b2->alive = false;
+				visited.insert(b2);
 			}
 		}
 	}
@@ -120,15 +146,34 @@ void GameScene::draw(IGame& game_interface) {
 
 	if (map)
 		map->draw(camera);
-	player->draw();
 
-	for (auto& enemy : enemies) {
-		enemy->draw();
-	}
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+
+	static float ambient_vec[4] = { 0.3f, 0.3f, 0.3f, 1.0f };
+	static float diffuse_vec[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	static float specular_vec[4] = { 0.7f, 0.7f, 0.7f, 1.0f };
+	static float position_vec[4] = { 0.0f, 20.0f, 0.0f, 1.0f };
+
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_vec);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse_vec);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specular_vec);
+	glLightfv(GL_LIGHT0, GL_POSITION, position_vec);
 
 	for (auto& bubble : bubbles) {
 		bubble->draw();
 	}
+
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_DEPTH_TEST);
+
+	player->draw();
+	for (auto& enemy : enemies) {
+		enemy->draw();
+	}
+
 }
 
 void GameScene::keyPressCallback(IInputManager& interface, const InputKeyboard& input) {
@@ -151,7 +196,10 @@ void GameScene::keyPressCallback(IInputManager& interface, const InputKeyboard& 
 		break;
 	case 'w':
 		if (!input.was_down && input.down) {
-			player->jump();
+			is_jumping = true;
+		}
+		else if (!input.down) {
+			is_jumping = false;
 		}
 		break;
 	case ' ':

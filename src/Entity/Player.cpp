@@ -23,6 +23,8 @@ Player::Player(IGame& game_interface, Map& map)
 }
 
 void Player::idle(float t, Map& map) {
+	is_down = false;
+
 	if (is_moving_left && is_moving_right) {
 		vel.x = 0.f;
 	}
@@ -69,8 +71,20 @@ void Player::stopMovingRight() {
 	is_moving_right = false;
 }
 
+void Player::onCollision(Bubble* bubble) {
+	if (pos.y > bubble->pos.y) {
+		vel.y = 6.f;
+	}
+}
+
+bool Player::isCollision(Bubble* bubble) {
+	return bubble->isFullyBlown() && bubble->pos.dist(pos) < bubble->getSize() + size.x;
+}
+
 void Player::jump() {
-	vel.y = 12.f;
+	if (is_down) {
+		vel.y = 12.f;
+	}
 }
 
 Bubble* Player::shootBubble(IGame& game_interface, Map& map) {

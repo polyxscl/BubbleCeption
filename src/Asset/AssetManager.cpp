@@ -101,7 +101,7 @@ void AssetManager::loadAssets(const fs::path& directory) {
 	// MaterialAsset
 
 	auto material_ptr = std::make_shared<MaterialAsset>("null");
-	material_ptr->set_ambient(0.05f, 0.05f, 0.05f, 1.0f);
+	material_ptr->set_ambient(0.5f, 0.5f, 0.5f, 1.0f);
 	material_ptr->set_diffuse(0.5f, 0.5f, 0.5f, 1.0f);
 	material_ptr->set_emission(0.0f, 0.0f, 0.0f, 1.0f);
 	material_ptr->set_specular(0.7f, 0.7f, 0.7f, 1.0f);
@@ -123,7 +123,7 @@ std::shared_ptr<MaterialAsset> AssetManager::getMaterialAsset(std::string id) {
 	if (materials.find(id) != materials.end())
 		return materials[id];
 	else {
-		logger << "Failed to retrieve MaterialAsset of id " << id << " - returning nullptr..." << logger.warn;
+		logger << "Failed to retrieve MaterialAsset of id " << id << " - replacing with null material..." << logger.warn;
 		return materials["null"];
 	}
 }

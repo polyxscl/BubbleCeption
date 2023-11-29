@@ -6,7 +6,7 @@ void Tile::draw(const Camera& camera) {
 	const auto size = Vector2<float>(1.0f, 1.0f);
 
 	glEnable(GL_TEXTURE_2D);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
 	glBindTexture(GL_TEXTURE_2D, unwrapped_texture.getTextureID());
 

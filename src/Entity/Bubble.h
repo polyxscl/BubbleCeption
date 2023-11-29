@@ -21,14 +21,21 @@ public:
 	void onCollision(Bubble* bubble);
 	bool isCollision(Bubble* bubble);
 
+	void killCaptured();
+	bool isFullyBlown();
+
 	Direction direction = Direction::LEFT;
 	
 	Vector3<float> terminal_vel;
+
+	float getSize();
 
 private:
 	float time = 0;
 	bool fully_blown = false;
 	Enemy* captured_enemy = nullptr;
+
+	float size = 0;
 
 	SphereModel* sphere_model;
 

@@ -2,15 +2,15 @@
 
 #include "Tile.h"
 
-class SolidTile : public Tile {
+class SolidTile : virtual public Tile {
 public:
 	using Tile::Tile;
 
-	void init(IGame& game_interface) override;
-	void clear(IGame& game_interface) override;
-	void idle(float t) override;
+	virtual void init(IGame& game_interface) override;
+	virtual void clear(IGame& game_interface) override;
+	virtual void idle(float t) override;
 
-	bool isCollision(IEntityPhysics* ep) const override;
-	void onCollision(IEntityPhysics* ep) override;
+	virtual bool isCollision(IEntityPhysics* ep) const override;
+	virtual void onCollision(IEntityPhysics* ep) override;
 
 };

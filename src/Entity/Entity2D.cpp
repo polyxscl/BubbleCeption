@@ -41,4 +41,5 @@ void Entity2D::draw() {
 	}
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
 }

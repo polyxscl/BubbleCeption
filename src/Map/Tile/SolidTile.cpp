@@ -70,6 +70,7 @@ void SolidTile::onCollision(IEntityPhysics* ep) {
 	case 4:
 		ep->pos.y = y + hitbox.top() - ep->hitbox.bottom();
 		ep->vel.y = 0;
+		ep->is_down = true;
 		break;
 	default:
 		break;

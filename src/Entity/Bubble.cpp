@@ -34,6 +34,7 @@ void Bubble::idle(float t, Map& map) {
 		if (time > 0.5f)
 			fully_blown = true;
 	}
+	size = new_size_val;
 
 	EntityPhysics::idle(t, map);
 
@@ -91,4 +92,18 @@ void Bubble::onCollision(Bubble* bubble) {
 bool Bubble::isCollision(Bubble* bubble) {
 	auto dist = bubble->pos.dist(pos);
 	return dist < 1.1f;
+}
+
+float Bubble::getSize() {
+	return size;
+}
+
+void Bubble::killCaptured() {
+	if (captured_enemy) {
+		captured_enemy->alive = false;
+	}
+}
+
+bool Bubble::isFullyBlown() {
+	return fully_blown;
 }
