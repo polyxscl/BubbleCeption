@@ -1,3 +1,4 @@
+#include <random>
 #include "Minigame/M_Bubble.h"
 
 M_Bubble::M_Bubble() {
@@ -22,10 +23,19 @@ M_Bubble::M_Bubble(const M_Bubble& b) {
 	this->area = b.area;
 }
 
-void M_Bubble::draw() const{
+void M_Bubble::draw() const {
+	float emission[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	float diffuse[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	float specular[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	float ambient[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	float shininess[1] = { 10.f };
+	glMaterialfv(GL_FRONT, GL_EMISSION, emission);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
+	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
+
 	glPushMatrix();
-	if (this->mtl)
-		this->mtl->apply();
 	glTranslatef(this->center[0], this->center[1], this->center[2]);
 	glutSolidSphere(this->radius, this->slice, this->stack);
 	glPopMatrix();
@@ -80,8 +90,6 @@ void M_Bubble::move() {
 	this->handling(2, 0, this->block_setting[2]);
 
 	if (enemy) {
-		if (this->mtl)
-			this->mtl->set_diffuse(0.5f, 1.0f, 0.f, 0.5f);
 		enemy->setCenter(getCenter());
 	}
 

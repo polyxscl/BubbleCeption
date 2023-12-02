@@ -141,6 +141,12 @@ void InputManager::mouse(int button, int state, int x, int y) {
 	case GLUT_RIGHT_BUTTON:
 		mouse_button = MOUSE_BUTTON::RIGHT;
 		break;
+	case 3:
+		mouse_button = MOUSE_BUTTON::SCROLL_UP;
+		break;
+	case 4:
+		mouse_button = MOUSE_BUTTON::SCROLL_DOWN;
+		break;
 	default:
 		throw std::runtime_error("InvalidMouseButton");
 	}
@@ -148,6 +154,7 @@ void InputManager::mouse(int button, int state, int x, int y) {
 	auto input = InputMouse{
 		mouse_button,
 		state == GLUT_DOWN,
+		Vector2<int>(x, y),
 	};
 
 	instance->iterating = true;
@@ -171,8 +178,6 @@ void InputManager::mouse(int button, int state, int x, int y) {
 	case GLUT_RIGHT_BUTTON:
 		instance->mouse_right = (state == GLUT_DOWN);
 		break;
-	default:
-		throw std::runtime_error("InvalidMouseButton");
 	}
 }
 

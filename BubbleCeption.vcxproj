@@ -167,6 +167,7 @@
     <ClCompile Include="src\Minigame\M_Enemy.cpp" />
     <ClCompile Include="src\Minigame\M_Entity.cpp" />
     <ClCompile Include="src\Minigame\M_Image.cpp" />
+    <ClCompile Include="src\Minigame\M_Light.cpp" />
     <ClCompile Include="src\Minigame\M_Map.cpp" />
     <ClCompile Include="src\Minigame\M_Player.cpp" />
     <ClCompile Include="src\Minigame\M_Rect.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="src\Scene\Camera.cpp" />
     <ClCompile Include="src\Scene\GameScene.cpp" />
     <ClCompile Include="src\Scene\LoadingScene.cpp" />
+    <ClCompile Include="src\Scene\MinigameScene.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
     <ClCompile Include="src\Scene\SceneManager.cpp" />
     <ClCompile Include="src\Util\Logger.cpp" />
@@ -215,6 +217,7 @@
     <ClInclude Include="src\Minigame\M_Enemy.h" />
     <ClInclude Include="src\Minigame\M_Entity.h" />
     <ClInclude Include="src\Minigame\M_Image.h" />
+    <ClInclude Include="src\Minigame\M_Light.h" />
     <ClInclude Include="src\Minigame\M_Map.h" />
     <ClInclude Include="src\Minigame\M_Player.h" />
     <ClInclude Include="src\Minigame\M_Rect.h" />
@@ -225,6 +228,7 @@
     <ClInclude Include="src\Scene\Camera.h" />
     <ClInclude Include="src\Scene\GameScene.h" />
     <ClInclude Include="src\Scene\LoadingScene.h" />
+    <ClInclude Include="src\Scene\MinigameScene.h" />
     <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Scene\SceneManager.h" />
     <ClInclude Include="src\Scene\SceneManager.interface.h" />

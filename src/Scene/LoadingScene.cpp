@@ -2,7 +2,7 @@
 #include "Constants.h"
 #include "LoadingScene.h"
 
-#include "GameScene.h"
+#include "MinigameScene.h"
 
 using namespace std::placeholders;
 
@@ -36,7 +36,7 @@ void LoadingScene::idle(IGame& game_interface, float t) {
 	progress = elapsed / 2000.f;
 
 	if (progress > 1.0f)
-		this->switchTo(new GameScene());
+		this->switchTo(new MinigameScene());
 }
 
 void LoadingScene::draw(IGame& game_interface) {
@@ -79,5 +79,5 @@ void LoadingScene::draw(IGame& game_interface) {
 }
 
 void LoadingScene::keyPressCallback(IInputManager& interface, const InputKeyboard& input) {
-	this->switchTo(new GameScene());
+	this->switchTo(new MinigameScene());
 }

@@ -21,7 +21,7 @@ public:
 	void move();
 	void draw() const;
 	bool operator==(const M_Bubble& b) const;
-	std::shared_ptr<MaterialAsset> mtl;
+
 private:
 	FACE face;
 	STATE state = BLOWING;
@@ -29,4 +29,5 @@ private:
 	std::array<std::set<M_Rect>, 6> block_setting;
 	std::map<M_Cuboid, Vector3f> area;
 	M_Enemy* enemy = nullptr;
+
 };

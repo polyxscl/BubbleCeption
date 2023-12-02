@@ -1,11 +1,11 @@
 #include <random>
 #include "Minigame/M_Player.h"
 
-M_Image M_Player::player_set[4];
-
 static std::random_device rd;
 static std::mt19937 gen(rd());
 static std::uniform_real_distribution<float> dist(0.f, 1.f);
+
+M_Image M_Player::player_set[4];
 
 M_Player::M_Player() {
 
@@ -27,13 +27,8 @@ M_Player::M_Player(class M_Map& A, int b) {
 
 M_Bubble M_Player::shootBubble() {
 	auto bubble = M_Bubble(0.8f, 20, 20);
+
 	bubble.setCenter(this->center);
-	auto mtl = std::shared_ptr<MaterialAsset>();
-	mtl->set_ambient(dist(gen), dist(gen), dist(gen), 1.0f);
-	mtl->set_diffuse(dist(gen), dist(gen), dist(gen), 1.0f);
-	mtl->set_emission(dist(gen), dist(gen), dist(gen), 1.0f);
-	mtl->set_specular(dist(gen), dist(gen), dist(gen), 1.0f);
-	mtl->set_shininess(10.f);
 	bubble.set_block(this->block_setting);
 	bubble.set_area(this->bubble_area);
 	Vector3f r(2.f, 0.f, 0.f), l(-2.f, 0.f, 0.f), f(0.f, 0.f, 2.f), b(0.f, 0.f, -2.f);

@@ -2,7 +2,7 @@
 
 #include "Util/Vector.h"
 
-enum class MOUSE_BUTTON { LEFT, MIDDLE, RIGHT };
+enum class MOUSE_BUTTON { LEFT, MIDDLE, RIGHT, SCROLL_UP, SCROLL_DOWN };
 
 struct InputKeyboard {
 	const unsigned char key;
@@ -23,6 +23,7 @@ struct InputKeyboardSpecial {
 struct InputMouse {
 	const MOUSE_BUTTON button;
 	const bool down;
+	const Vector2<int> mouse_pos;
 };
 
 struct InputMouseMotion {

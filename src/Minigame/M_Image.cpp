@@ -16,3 +16,8 @@ void M_Image::draw(Vector3f a, Vector3f b, Vector3f c, Vector3f d) {
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 }
+
+M_Image& M_Image::setAsset(std::shared_ptr<ImageAsset> to_asset) {
+	asset = to_asset;
+	return *this;
+}

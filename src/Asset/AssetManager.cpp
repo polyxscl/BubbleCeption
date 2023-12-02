@@ -49,6 +49,7 @@ void AssetManager::loadAssets(const fs::path& directory) {
 				}
 				// Map data
 				else if (ext == ".json") {
+					if (!id.substr(0, 2).compare("M_")) continue;
 					auto ptr = std::make_shared<MapAsset>(id, path);
 					ptr->load();
 					maps.emplace(id, ptr);
