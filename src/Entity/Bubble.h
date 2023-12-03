@@ -24,6 +24,8 @@ public:
 	void killCaptured();
 	bool isFullyBlown();
 
+	bool hasEnemy();
+
 	Direction direction = Direction::LEFT;
 	
 	Vector3<float> terminal_vel;

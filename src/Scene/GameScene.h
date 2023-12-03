@@ -29,4 +29,6 @@ private:
 
 	std::unordered_set<Enemy*> enemies;
 	std::unordered_set<Bubble*> bubbles;
+
+	int health = 3;
 };

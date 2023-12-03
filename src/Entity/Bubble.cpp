@@ -11,7 +11,7 @@ Bubble::Bubble(IGame& game_interface, Map& map)
 	sphere_model->size = Vector3<float>(0.0f, 0.0f, 0.0f);
 	
 	auto& asset_manager = game_interface.getIAssetManager();
-	sphere_model->material = asset_manager.getMaterialAsset("");
+	sphere_model->material = asset_manager.getMaterialAsset("bubble");
 
 	model = sphere_model;
 }
@@ -106,4 +106,8 @@ void Bubble::killCaptured() {
 
 bool Bubble::isFullyBlown() {
 	return fully_blown;
+}
+
+bool Bubble::hasEnemy() {
+	return captured_enemy != nullptr;
 }

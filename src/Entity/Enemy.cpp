@@ -15,7 +15,7 @@ Enemy::Enemy(IGame& game_interface, Map& map)
 	hitbox = Rect<float>(Vector2<float>(-0.5f, -0.5f), Vector2<float>(0.5f, 0.5f));
 
 	auto& asset_manager = game_interface.getIAssetManager();
-	texture = asset_manager.getImageAsset("");
+	texture = asset_manager.getImageAsset("enemy");
 }
 
 void Enemy::idle(float t, Map& map) {
@@ -32,11 +32,13 @@ void Enemy::idle(float t, Map& map) {
 	if (direction == Direction::LEFT) {
 		if (!map.hasTile(pos + Vector3<float>(0.0f, -0.5f, 0.0f))) {
 			direction = Direction::RIGHT;
+			flipped = false;
 		}
 	}
 	else {
 		if (!map.hasTile(pos + Vector3<float>(1.0f, -0.5f, 0.0f))) {
 			direction = Direction::LEFT;
+			flipped = true;
 		}
 	}
 
@@ -47,7 +49,8 @@ void Enemy::idle(float t, Map& map) {
 		vel.x = 5.0f;
 	}
 
-	EntityPhysics::idle(t, map);
+	if (!captured)
+		EntityPhysics::idle(t, map);
 }
 
 void Enemy::draw() {

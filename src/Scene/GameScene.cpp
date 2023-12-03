@@ -30,15 +30,29 @@ auto& input_manager = game_interface.getIInputManager();
 	camera.setViewportSize(Vector2<float>(SCREEN_WIDTH, SCREEN_HEIGHT));
 	camera.setCenter(Vector3<float>(SCREEN_WIDTH / 2.f - 0.5f, SCREEN_HEIGHT / 2, 0.0f));
 
-	player->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
+	player->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 300.0f, 0.0f);
+	
+	{
+		auto enemy = new Enemy(game_interface, *map);
+		enemy->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
+		enemies.emplace(enemy);
+	}
 
-	auto enemy = new Enemy(game_interface, *map);
+	{
+		auto enemy = new Enemy(game_interface, *map);
+		enemy->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
+		enemies.emplace(enemy);
+	}
 
-	enemy->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
-
-	enemies.emplace(enemy);
+	{
+		auto enemy = new Enemy(game_interface, *map);
+		enemy->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
+		enemies.emplace(enemy);
+	}
 
 	game = &game_interface;
+
+	health = 3;
 }
 
 void GameScene::clear(IGame& game_interface) {
@@ -84,9 +98,14 @@ void GameScene::idle(IGame& game_interface, float t) {
 		map->handleCollision(enemy);
 
 		for (auto& bubble : bubbles) {
-			if (bubble->isCollision(enemy)) {
+			if (bubble->isCollision(enemy) && !enemy->captured && !bubble->hasEnemy()) {
 				bubble->onCollision(enemy);
 			}
+		}
+
+		if (enemy->getWorldHitbox().intersects(player->getWorldHitbox()) && !player->isHit() && !enemy->captured) {
+			player->doHit();
+			health--;
 		}
 
 		if (!enemy->alive) {
@@ -176,6 +195,23 @@ void GameScene::draw(IGame& game_interface) {
 		enemy->draw();
 	}
 
+	auto& asset_manager = game_interface.getIAssetManager();
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	for (int i = 0; i < 3; ++i) {
+		glEnable(GL_TEXTURE_2D);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glBindTexture(GL_TEXTURE_2D, asset_manager.getImageAsset(i < health ? "heart" : "heart_broken")->getTextureID());
+		glBegin(GL_QUADS);
+		glTexCoord2f(0.0f, 0.0f); glVertex2f(-0.5f + i, -0.5f);
+		glTexCoord2f(0.0f, 1.0f); glVertex2f(-0.5f + i, 0.5f);
+		glTexCoord2f(1.0f, 1.0f); glVertex2f(0.5f + i, 0.5f);
+		glTexCoord2f(1.0f, 0.0f); glVertex2f(0.5f + i, -0.5f);
+		glEnd();
+		glDisable(GL_TEXTURE_2D);
+	}
+	glDisable(GL_BLEND);
 }
 
 void GameScene::keyPressCallback(IInputManager& interface, const InputKeyboard& input) {
