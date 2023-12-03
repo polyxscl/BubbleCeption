@@ -58,5 +58,5 @@ private:
 
 	Light light = Light(150, 150, 150, GL_LIGHT0);
 
-	bool isScrolling = false;
+	bool isScrolling;
 };

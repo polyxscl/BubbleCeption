@@ -4,6 +4,7 @@
 
 using namespace std::placeholders;
 
+bool jump;
 void MinigameScene::init(IGame& game_interface) {
 	auto& asset_manager = game_interface.getIAssetManager();
 	auto& input_manager = game_interface.getIInputManager();
@@ -32,12 +33,12 @@ void MinigameScene::init(IGame& game_interface) {
 	light.setSpecular(1.0f, 1.0f, 1.0f, 1.0f);
 
 	A.generate("assets/maps/M_prologue.json");
-	player.setspeed(1.f);
+	player.setspeed(0.7f);
 	for (auto& i : A.get_enemy_init()) {
 		M_Enemy enemy(i.first, i.second);
 		enemyset.push_back(enemy);
 	}
-
+	bool jump = true;
 	Look[0] = 50.f;
 	Look[1] = 1.57f;
 	Look[2] = 0.f;
@@ -59,6 +60,7 @@ void MinigameScene::init(IGame& game_interface) {
 	M_Block::block_set[1] = M_Image().setAsset(asset_manager.getImageAsset("m_block01"));
 	M_Block::block_set[2] = M_Image().setAsset(asset_manager.getImageAsset("m_block02"));
 	M_Block::block_set[3] = M_Image().setAsset(asset_manager.getImageAsset("m_block03"));
+	this->isScrolling = true;
 }
 
 void MinigameScene::clear(IGame& game_interface) {
@@ -163,8 +165,14 @@ void MinigameScene::keyPressCallback(IInputManager& interface, const InputKeyboa
 	float b = player.getCenter()[1];
 	switch (input.key) {
 	case ' ':
-		if (player.getverticalstate() == STOP) {
-			player.setverticalstate(JUMP);
+		if (input.down) {
+			if (player.getverticalstate() == STOP) {
+				player.setverticalstate(JUMP);
+			}
+			jump = false;
+		}
+		if (!input.down) {
+			jump = true;
 		}
 		break;
 	case 'S': case 's':
@@ -174,6 +182,7 @@ void MinigameScene::keyPressCallback(IInputManager& interface, const InputKeyboa
 		finish();
 		break;
 	}
+	
 }
 
 void MinigameScene::specialKeyPressCallback(IInputManager& interface, const InputKeyboardSpecial& input) {
@@ -220,27 +229,27 @@ void MinigameScene::specialKeyPressCallback(IInputManager& interface, const Inpu
 
 void MinigameScene::mousePressCallback(IInputManager& interface, const InputMouse& input) {
 	if (!enabled) return;
-	if (input.down && input.button == MOUSE_BUTTON::LEFT) {
+	if ((input.down) && (input.button == MOUSE_BUTTON::LEFT)) {
 		lastX = input.mouse_pos.x;
 		lastY = input.mouse_pos.y;
-		isScrolling = false;
+		this->isScrolling = false;
 	}
 	else if (input.button == MOUSE_BUTTON::SCROLL_UP && Look[0] > 45.f) {
 		Look[0] -= 0.5f;
-		isScrolling = true;
+		this->isScrolling = true;
 	}
 	else if (input.button == MOUSE_BUTTON::SCROLL_DOWN && Look[0] < 65.f) {
 		Look[0] += 0.5f;
-		isScrolling = true;
+		this->isScrolling = true;
 	}
 	else if (!input.down) {
-		isScrolling = true;
+		this->isScrolling = true;
 	}
 }
 
 void MinigameScene::mouseMotionCallback(IInputManager& interface, const InputMouseMotion& input) {
 	if (!enabled) return;
-	if (!isScrolling) {
+	if (!this->isScrolling) {
 		int dx, dy;
 		dx = input.mouse_pos.x - lastX;
 		dy = input.mouse_pos.y - lastY;

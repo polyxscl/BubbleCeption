@@ -51,7 +51,7 @@ void M_Entity::setface(FACE face) {
 
 void M_Entity::setverticalstate(VERTICAL_STATE v) {
 	if (this->verticalstate!=JUMP && v == JUMP) {
-		Vector3f v(0.f, 3.f, 0.f), a(0.f, -1.2f, 0.f);
+		Vector3f v(0.f, 1.7f, 0.f), a(0.f, -0.3f, 0.f);
 		this->velocity += v;
 		this->acceleration = a;
 	}

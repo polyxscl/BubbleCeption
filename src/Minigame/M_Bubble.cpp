@@ -25,7 +25,7 @@ M_Bubble::M_Bubble(const M_Bubble& b) {
 
 void M_Bubble::draw() const {
 	float emission[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
-	float diffuse[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	float diffuse[4] = { 0.5f, 0.5f, 0.5f, 0.5f };
 	float specular[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 	float ambient[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 	float shininess[1] = { 10.f };

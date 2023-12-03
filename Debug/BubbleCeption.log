@@ -1,0 +1,197 @@
+﻿  AssetManager.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\filesystem(13): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\AssetManager.interface.h(5,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Asset/ImageAsset.h': No such file or directory
+  AudioAsset.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\AudioAsset.h(6,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Asset/Asset.h': No such file or directory
+  ImageAsset.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\ImageAsset.h(6,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Asset/Asset.h': No such file or directory
+  MapAsset.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\filesystem(13): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(6,21): error C2039: 'filesystem': 'std'의 멤버가 아닙니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\string(24,1): message : 'std' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(6,31): error C2878: 'filesystem': 같은 이름을 가진 네임스페이스 또는 클래스가 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,39): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,47): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,8): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,16): error C2143: 구문 오류: ';'이(가) '&' 앞에 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,27): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,15): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,19): error C2064: 항은 0개의 인수를 받아들이는 함수로 계산되지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,35): error C2789: 'Asset::path': const 한정 형식의 개체를 초기화해야 합니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,12): message : 'Asset::path' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,5): error C2614: 'Asset': 멤버 초기화가 잘못되었습니다. 'file_path'이(가) 기본 또는 멤버가 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,15): error C2065: 'file_path': 선언되지 않은 식별자입니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,34): error C2789: 'Asset::path': const 한정 형식의 개체를 초기화해야 합니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,12): message : 'Asset::path' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,5): error C2614: 'Asset': 멤버 초기화가 잘못되었습니다. 'file_path'이(가) 기본 또는 멤버가 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\MapAsset.h(7,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Util/Logger.h': No such file or directory
+  MaterialAsset.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\filesystem(13): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\MaterialAsset.h(6,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Asset/Asset.h': No such file or directory
+  OBJAsset.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\filesystem(13): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(6,21): error C2039: 'filesystem': 'std'의 멤버가 아닙니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\string(24,1): message : 'std' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(6,31): error C2878: 'filesystem': 같은 이름을 가진 네임스페이스 또는 클래스가 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,39): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,47): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,8): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,16): error C2143: 구문 오류: ';'이(가) '&' 앞에 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,27): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,15): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,19): error C2064: 항은 0개의 인수를 받아들이는 함수로 계산되지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,35): error C2789: 'Asset::path': const 한정 형식의 개체를 초기화해야 합니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,12): message : 'Asset::path' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,5): error C2614: 'Asset': 멤버 초기화가 잘못되었습니다. 'file_path'이(가) 기본 또는 멤버가 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,15): error C2065: 'file_path': 선언되지 않은 식별자입니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,34): error C2789: 'Asset::path': const 한정 형식의 개체를 초기화해야 합니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,12): message : 'Asset::path' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,5): error C2614: 'Asset': 멤버 초기화가 잘못되었습니다. 'file_path'이(가) 기본 또는 멤버가 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\OBJAsset.h(8,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Util/Logger.h': No such file or directory
+  Bubble.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Entity\Bubble.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Entity/Entity3D.h': No such file or directory
+  Enemy.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Entity\Enemy.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Entity/Entity2D.h': No such file or directory
+  Entity2D.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Entity\Entity.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Util/Vector.h': No such file or directory
+  Entity3D.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Entity\Entity.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Util/Vector.h': No such file or directory
+  EntityPhysics.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Entity\EntityPhysics.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Util/Rect.h': No such file or directory
+  Player.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Entity\Player.cpp(5,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Constants.h': No such file or directory
+  Game.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\filesystem(13): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(6,21): error C2039: 'filesystem': 'std'의 멤버가 아닙니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\sstream(20,1): message : 'std' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(6,31): error C2878: 'filesystem': 같은 이름을 가진 네임스페이스 또는 클래스가 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,39): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,47): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,8): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,16): error C2143: 구문 오류: ';'이(가) '&' 앞에 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,27): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,15): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,19): error C2064: 항은 0개의 인수를 받아들이는 함수로 계산되지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,35): error C2789: 'Asset::path': const 한정 형식의 개체를 초기화해야 합니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,12): message : 'Asset::path' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,5): error C2614: 'Asset': 멤버 초기화가 잘못되었습니다. 'file_path'이(가) 기본 또는 멤버가 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,15): error C2065: 'file_path': 선언되지 않은 식별자입니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,34): error C2789: 'Asset::path': const 한정 형식의 개체를 초기화해야 합니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,12): message : 'Asset::path' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,5): error C2614: 'Asset': 멤버 초기화가 잘못되었습니다. 'file_path'이(가) 기본 또는 멤버가 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\ImageAsset.h(9,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'GL/freeglut.h': No such file or directory
+  Game.interface.h
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\filesystem(13): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(6,21): error C2039: 'filesystem': 'std'의 멤버가 아닙니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\sstream(20,1): message : 'std' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(6,31): error C2878: 'filesystem': 같은 이름을 가진 네임스페이스 또는 클래스가 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,39): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,47): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,8): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,16): error C2143: 구문 오류: ';'이(가) '&' 앞에 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,27): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,15): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,19): error C2064: 항은 0개의 인수를 받아들이는 함수로 계산되지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,35): error C2789: 'Asset::path': const 한정 형식의 개체를 초기화해야 합니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,12): message : 'Asset::path' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,5): error C2614: 'Asset': 멤버 초기화가 잘못되었습니다. 'file_path'이(가) 기본 또는 멤버가 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,15): error C2065: 'file_path': 선언되지 않은 식별자입니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,34): error C2789: 'Asset::path': const 한정 형식의 개체를 초기화해야 합니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,12): message : 'Asset::path' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,5): error C2614: 'Asset': 멤버 초기화가 잘못되었습니다. 'file_path'이(가) 기본 또는 멤버가 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\ImageAsset.h(9,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'GL/freeglut.h': No such file or directory
+  InputManager.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Input\InputManager.interface.h(4,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Input/Input.h': No such file or directory
+  InputManager.interface.h
+C:\Users\gmlwn\Documents\BubbleCeption\src\Input\InputManager.interface.h(4,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Input/Input.h': No such file or directory
+  main.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\filesystem(13): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(6,21): error C2039: 'filesystem': 'std'의 멤버가 아닙니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\sstream(20,1): message : 'std' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(6,31): error C2878: 'filesystem': 같은 이름을 가진 네임스페이스 또는 클래스가 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,39): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(14,47): error C2143: 구문 오류: ','이(가) '&' 앞에 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,8): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,16): error C4430: 형식 지정자가 없습니다. int로 가정합니다. 참고: C++에서는 기본 int를 지원하지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,16): error C2143: 구문 오류: ';'이(가) '&' 앞에 없습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,27): error C2238: ';' 앞에 예기치 않은 토큰이 있습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,15): error C2653: 'fs': 클래스 또는 네임스페이스 이름이 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,19): error C2064: 항은 0개의 인수를 받아들이는 함수로 계산되지 않습니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,35): error C2789: 'Asset::path': const 한정 형식의 개체를 초기화해야 합니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,12): message : 'Asset::path' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(12,5): error C2614: 'Asset': 멤버 초기화가 잘못되었습니다. 'file_path'이(가) 기본 또는 멤버가 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,15): error C2065: 'file_path': 선언되지 않은 식별자입니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,34): error C2789: 'Asset::path': const 한정 형식의 개체를 초기화해야 합니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(22,12): message : 'Asset::path' 선언을 참조하십시오.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\Asset.h(15,5): error C2614: 'Asset': 멤버 초기화가 잘못되었습니다. 'file_path'이(가) 기본 또는 멤버가 아닙니다.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Asset\ImageAsset.h(9,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'GL/freeglut.h': No such file or directory
+  Map.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\optional(12): warning STL4038: The contents of <optional> are available only with C++17 or later.
+C:\Users\gmlwn\Documents\BubbleCeption\src\Map\Map.h(6,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Util/Vector.h': No such file or directory
+  ConveyorTile.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Map\Tile\Tile.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Util/Rect.h': No such file or directory
+  MinigameTile.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Map\Tile\Tile.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Util/Rect.h': No such file or directory
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  PlatformTile.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Map\Tile\Tile.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Util/Rect.h': No such file or directory
+  SolidTile.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Map\Tile\Tile.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Util/Rect.h': No such file or directory
+  Tile.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Map\Tile\Tile.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Util/Rect.h': No such file or directory
+  M_BasicCollision.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_BasicCollision.cpp(1,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Minigame/M_BasicCollision.h': No such file or directory
+  M_Block.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_Block.cpp(1,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Minigame/M_Block.h': No such file or directory
+  M_Bubble.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_Bubble.cpp(2,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Minigame/M_Bubble.h': No such file or directory
+  M_Collision.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_Collision.cpp(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Minigame/M_Collision.h': No such file or directory
+  M_Cuboid.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_Cuboid.cpp(1,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Minigame/M_Cuboid.h': No such file or directory
+  M_Enemy.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_Enemy.cpp(1,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Minigame/M_Enemy.h': No such file or directory
+  M_Entity.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_Entity.cpp(1,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Minigame/M_Entity.h': No such file or directory
+  M_Image.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_Image.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Asset/ImageAsset.h': No such file or directory
+  M_Light.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_Light.cpp(1,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Minigame/M_Light.h': No such file or directory
+  M_Map.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_Map.cpp(6,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Minigame/M_Map.h': No such file or directory
+  M_Player.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_Player.cpp(2,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Minigame/M_Player.h': No such file or directory
+  M_Rect.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_Rect.cpp(1,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Minigame/M_Rect.h': No such file or directory
+  M_Shape3D.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_Shape3D.cpp(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Minigame/M_Shape3D.h': No such file or directory
+  M_Vector.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Minigame\M_Vector.cpp(1,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Minigame/M_Vector.h': No such file or directory
+  SphereModel.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Render\Model.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Util/Vector.h': No such file or directory
+  Camera.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Scene\Camera.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Util/Vector.h': No such file or directory
+  GameScene.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Scene\GameScene.cpp(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Constants.h': No such file or directory
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  LoadingScene.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Scene\LoadingScene.cpp(2,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Constants.h': No such file or directory
+  MinigameScene.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Scene\MinigameScene.h(8,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Constants.h': No such file or directory
+  Scene.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Scene\Scene.h(3,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Game.interface.h': No such file or directory
+  SceneManager.cpp
+C:\Users\gmlwn\Documents\BubbleCeption\src\Scene\SceneManager.h(7,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'Game.interface.h': No such file or directory
+  Logger.cpp
+  코드를 생성하고 있습니다...
