@@ -176,8 +176,10 @@
     <ClCompile Include="src\Minigame\M_Vector.cpp" />
     <ClCompile Include="src\Render\SphereModel.cpp" />
     <ClCompile Include="src\Scene\Camera.cpp" />
+    <ClCompile Include="src\Scene\GameoverScene.cpp" />
     <ClCompile Include="src\Scene\GameScene.cpp" />
     <ClCompile Include="src\Scene\LoadingScene.cpp" />
+    <ClCompile Include="src\Scene\MainmenuScene.cpp" />
     <ClCompile Include="src\Scene\MinigameScene.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
     <ClCompile Include="src\Scene\SceneManager.cpp" />
@@ -228,8 +230,10 @@
     <ClInclude Include="src\Render\Model.h" />
     <ClInclude Include="src\Render\SphereModel.h" />
     <ClInclude Include="src\Scene\Camera.h" />
+    <ClInclude Include="src\Scene\GameoverScene.h" />
     <ClInclude Include="src\Scene\GameScene.h" />
     <ClInclude Include="src\Scene\LoadingScene.h" />
+    <ClInclude Include="src\Scene\MainmenuScene.h" />
     <ClInclude Include="src\Scene\MinigameScene.h" />
     <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Scene\SceneManager.h" />

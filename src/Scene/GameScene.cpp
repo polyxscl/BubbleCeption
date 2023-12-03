@@ -1,4 +1,5 @@
 #include <deque>
+#include <random>
 
 #include "Constants.h"
 #include "GameScene.h"
@@ -7,11 +8,16 @@
 #include "Map/Tile/PlatformTile.h",
 
 #include "MinigameScene.h"
+#include "GameoverScene.h"
 
 using namespace std::placeholders;
 
+static std::random_device rd;
+static std::mt19937 gen(rd());
+static std::uniform_real_distribution<float> dist(3.f, 10.f);
+
 void GameScene::init(IGame& game_interface) {
-auto& input_manager = game_interface.getIInputManager();
+	auto& input_manager = game_interface.getIInputManager();
 	input_manager.attachKeyPressCallback(
 		"gs_key",
 		std::bind(&GameScene::keyPressCallback, this, _1, _2)
@@ -32,21 +38,24 @@ auto& input_manager = game_interface.getIInputManager();
 
 	player->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 300.0f, 0.0f);
 	
-	{
+	for (int i = 0; i < 3; ++i) {
 		auto enemy = new Enemy(game_interface, *map);
 		enemy->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
+		enemy->speed = dist(gen);
 		enemies.emplace(enemy);
 	}
 
-	{
+	for (int i = 0; i < 3; ++i) {
 		auto enemy = new Enemy(game_interface, *map);
-		enemy->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
+		enemy->pos = Vector3<int>(SCREEN_WIDTH / 2 - 5.0f, 2.0f, 0.0f);
+		enemy->speed = dist(gen);
 		enemies.emplace(enemy);
 	}
 
-	{
+	for (int i = 0; i < 3; ++i) {
 		auto enemy = new Enemy(game_interface, *map);
-		enemy->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
+		enemy->pos = Vector3<int>(SCREEN_WIDTH / 2 + 5.0f, 2.0f, 0.0f);
+		enemy->speed = dist(gen);
 		enemies.emplace(enemy);
 	}
 
@@ -61,19 +70,35 @@ void GameScene::clear(IGame& game_interface) {
 	input_manager.detachKeyPressCallback("gs_key");
 
 	for (auto& enemy : enemies) {
-		delete enemy;
+		if (enemy != nullptr) {
+			delete enemy;
+		}
 	}
 	enemies.clear();
 
 	for (auto& bubble : bubbles) {
-		delete bubble;
+		if (bubble != nullptr) {
+			delete bubble;
+		}
 	}
 	bubbles.clear();
 
-	delete map;
+	if (map != nullptr) {
+		delete map;
+		map = nullptr;
+	}
+
+	if (player != nullptr) {
+		delete player;
+	}
 }
 
 void GameScene::idle(IGame& game_interface, float t) {
+	if (this->end) {
+		finish();
+		return;
+	}
+
 	player->idle(t, *map);
 	map->handleCollision(player);
 	if (is_jumping) {
@@ -149,6 +174,12 @@ void GameScene::idle(IGame& game_interface, float t) {
 			}
 		}
 	}
+
+	if (health == 0) {
+		this->paused = true;
+		this->end = true;
+		append(new GameoverScene());
+	}
 }
 
 void GameScene::draw(IGame& game_interface) {
@@ -199,6 +230,7 @@ void GameScene::draw(IGame& game_interface) {
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 	for (int i = 0; i < 3; ++i) {
 		glEnable(GL_TEXTURE_2D);
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);

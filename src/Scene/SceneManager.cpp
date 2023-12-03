@@ -94,10 +94,12 @@ void SceneManager::finishCallback(Scene* self) {
 
 	self->clear(*game_interface);
 	stack.erase(std::find(stack.begin(), stack.end(), self));
-	delete self;
 
-	if (!stack.empty())
+	if (!stack.empty()) {
 		stack.back()->enabled = true;
+		stack.back()->paused = false;
+		stack.back()->visible = true;
+	}
 }
 
 void SceneManager::checkInit() {

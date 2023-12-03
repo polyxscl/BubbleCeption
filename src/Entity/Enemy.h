@@ -12,6 +12,7 @@ public:
 	void draw() override;
 	
 	bool captured = false;
+	float speed = 5.0f;
 
 private:
 	float alive_time = 0;

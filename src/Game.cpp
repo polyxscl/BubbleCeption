@@ -88,7 +88,7 @@ void Game::display() {
 void Game::idle() {
 	Game::checkInit();
 	
-	instance->scene_manager.idle((clock() - last_time) / 1000.f);
+	instance->scene_manager.idle(std::min((clock() - last_time) / 1000.f, 0.016f));
 
 	glutPostRedisplay();
 	last_time = clock();

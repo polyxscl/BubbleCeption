@@ -1,12 +1,12 @@
 #include <iostream>
 #include "Constants.h"
-#include "LoadingScene.h"
+#include "GameoverScene.h"
 
-#include "MainmenuScene.h"
+#include "GameScene.h"
 
 using namespace std::placeholders;
 
-void LoadingScene::init(IGame& game_interface) {
+void GameoverScene::init(IGame& game_interface) {
 	auto& asset_manager = game_interface.getIAssetManager();
 
 	enabled = true;
@@ -14,32 +14,32 @@ void LoadingScene::init(IGame& game_interface) {
 	paused = false;
 
 	progress = 0.0f;
-	time = clock();
+	elapsed = 0.0f;
 
 	auto& input_manager = game_interface.getIInputManager();
 	input_manager.attachKeyPressCallback(
-		"ls_key",
-		std::bind(&LoadingScene::keyPressCallback, this, _1, _2)
+		"gos_key",
+		std::bind(&GameoverScene::keyPressCallback, this, _1, _2)
 	);
 
-	this->texture = asset_manager.getImageAsset("snu");
+	this->texture = asset_manager.getImageAsset("gameover");
 }
 
-void LoadingScene::clear(IGame& game_interface) {
+void GameoverScene::clear(IGame& game_interface) {
 	auto& input_manager = game_interface.getIInputManager();
-	input_manager.detachKeyPressCallback("ls_key");
+	input_manager.detachKeyPressCallback("gos_key");
 }
 
-void LoadingScene::idle(IGame& game_interface, float t) {
-	auto elapsed = clock() - time;
+void GameoverScene::idle(IGame& game_interface, float t) {
+	elapsed += t;
 
-	progress = elapsed / 2000.f;
+	progress = elapsed / 2.f;
 
 	if (progress > 1.0f)
-		this->switchTo(new MainmenuScene());
+		this->finish();
 }
 
-void LoadingScene::draw(IGame& game_interface) {
+void GameoverScene::draw(IGame& game_interface) {
 	// If texture does not exist, return.
 	if (!texture) return;
 
@@ -54,6 +54,8 @@ void LoadingScene::draw(IGame& game_interface) {
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -74,10 +76,29 @@ void LoadingScene::draw(IGame& game_interface) {
 	glTexCoord2f(1.0f, 0.0f); glVertex2f(size.x / 2 + pos.x, -size.y / 2 + pos.y);
 	glEnd();
 
+	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
+
+	// Set the color to black with the current opacity
+	glColor4f(0.0f, 0.0f, 0.0f, progress);
+
+	// Enable blending for transparency
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	// Draw a full-screen rectangle
+	glBegin(GL_QUADS);
+	glVertex2f(-SCREEN_WIDTH / 2, -SCREEN_HEIGHT / 2);
+	glVertex2f(SCREEN_WIDTH / 2, -SCREEN_HEIGHT / 2);
+	glVertex2f(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	glVertex2f(-SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	glEnd();
+
+	// Disable blending
+
 	glDisable(GL_BLEND);
 }
 
-void LoadingScene::keyPressCallback(IInputManager& interface, const InputKeyboard& input) {
-	this->switchTo(new MainmenuScene());
+void GameoverScene::keyPressCallback(IInputManager& interface, const InputKeyboard& input) {
+
 }
