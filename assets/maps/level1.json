@@ -291,22 +291,22 @@
             "id": "PLATFORM",
             "pos": [14, 3]
         },
-		{
-			"id": "PLATFORM",
-			"pos": [1, 6]
-		},
-		{
-			"id": "PLATFORM",
-			"pos": [2, 6]
-		},
-		{
-			"id": "PLATFORM",
-			"pos": [18, 6]
-		},
-		{
-			"id": "PLATFORM",
-			"pos": [17, 6]
-		},
+		    {
+			    "id": "PLATFORM",
+			    "pos": [1, 6]
+		    },
+		    {
+			    "id": "PLATFORM",
+			    "pos": [2, 6]
+		    },
+		    {
+			    "id": "PLATFORM",
+			    "pos": [18, 6]
+		    },
+		    {
+			    "id": "PLATFORM",
+			    "pos": [17, 6]
+		    },
         {
             "id": "PLATFORM",
             "pos": [5, 9]

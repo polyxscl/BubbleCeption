@@ -4,7 +4,9 @@
 #include "GameScene.h"
 
 #include "Map/Tile/SolidTile.h"
-#include "Map/Tile/PlatformTile.h"
+#include "Map/Tile/PlatformTile.h",
+
+#include "MinigameScene.h"
 
 using namespace std::placeholders;
 
@@ -177,6 +179,7 @@ void GameScene::draw(IGame& game_interface) {
 }
 
 void GameScene::keyPressCallback(IInputManager& interface, const InputKeyboard& input) {
+	if (!enabled) return;
 	switch (input.key) {
 	case 'a':
 		if (!input.was_down && input.down) {
@@ -209,9 +212,13 @@ void GameScene::keyPressCallback(IInputManager& interface, const InputKeyboard& 
 				bubbles.emplace(bubble);
 			}
 		}
+		break;
+	case 'm':
+		this->enabled = false;
+		this->append(new MinigameScene());
 	}
 }
 
 void GameScene::specialKeyPressCallback(IInputManager& interface, const InputKeyboardSpecial& input) {
-
+	if (!enabled) return;
 }

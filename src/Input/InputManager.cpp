@@ -52,14 +52,15 @@ void InputManager::__keyboardCallback(unsigned char key, int x, int y, bool down
 		ctrl, shift, alt,
 	};
 
-	instance->iterating = true;
-	for (auto& [_, callback] : instance->key_press_callbacks) {
-
-		callback(*instance, input);
-	}
-	instance->iterating = false;
-	for (auto& key : instance->key_press_callbacks_to_erase) {
-		instance->key_press_callbacks.erase(key);
+	for (auto it = instance->key_press_callbacks.begin(); it != instance->key_press_callbacks.end();) {
+		auto& [_, callback] = *it;
+		if (!callback.valid) {
+			it = instance->key_press_callbacks.erase(it);
+		}
+		else {
+			callback.func(*instance, input);
+			++it;
+		}
 	}
 
 	instance->ctrl = ctrl;
@@ -95,13 +96,16 @@ void InputManager::__specialCallback(int key, int x, int y, bool down, bool was_
 		ctrl, shift, alt,
 	};
 
-	instance->iterating = true;
-	for (auto& [_, callback] : instance->special_key_press_callbacks) {
-		callback(*instance, input);
-	}
-	instance->iterating = false;
-	for (auto& key : instance->special_key_press_callbacks_to_erase) {
-		instance->special_key_press_callbacks.erase(key);
+
+	for (auto it = instance->special_key_press_callbacks.begin(); it != instance->special_key_press_callbacks.end();) {
+		auto& [_, callback] = *it;
+		if (!callback.valid) {
+			it = instance->special_key_press_callbacks.erase(it);
+		}
+		else {
+			callback.func(*instance, input);
+			++it;
+		}
 	}
 
 	instance->ctrl = ctrl;
@@ -157,13 +161,15 @@ void InputManager::mouse(int button, int state, int x, int y) {
 		Vector2<int>(x, y),
 	};
 
-	instance->iterating = true;
-	for (auto& [_, callback] : instance->mouse_press_callbacks) {
-		callback(*instance, input);
-	}
-	instance->iterating = false;
-	for (auto& key : instance->mouse_press_callbacks_to_erase) {
-		instance->mouse_press_callbacks.erase(key);
+	for (auto it = instance->mouse_press_callbacks.begin(); it != instance->mouse_press_callbacks.end();) {
+		auto& [_, callback] = *it;
+		if (!callback.valid) {
+			it = instance->mouse_press_callbacks.erase(it);
+		}
+		else {
+			callback.func(*instance, input);
+			++it;
+		}
 	}
 
 	instance->mouse_pos = Vector2<int>(x, y);
@@ -188,13 +194,15 @@ void InputManager::motion(int x, int y) {
 		Vector2<int>(x, y)
 	};
 
-	instance->iterating = true;
-	for (auto& [_, callback] : instance->mouse_motion_callbacks) {
-		callback(*instance, input);
-	}
-	instance->iterating = false;
-	for (auto& key : instance->mouse_motion_callbacks_to_erase) {
-		instance->mouse_motion_callbacks.erase(key);
+	for (auto it = instance->mouse_motion_callbacks.begin(); it != instance->mouse_motion_callbacks.end();) {
+		auto& [_, callback] = *it;
+		if (!callback.valid) {
+			it = instance->mouse_motion_callbacks.erase(it);
+		}
+		else {
+			callback.func(*instance, input);
+			++it;
+		}
 	}
 
 	instance->mouse_pos.x = x;
@@ -227,55 +235,47 @@ bool InputManager::isShiftPressed() const {
 
 void InputManager::attachKeyPressCallback(std::string id, keyPressFuncType func) {
 	logger << "Attached keyPressCallback of id " << id << logger.info;
-	key_press_callbacks.emplace(id, func);
+	key_press_callbacks.emplace(id, KeyPressFunc{ true, func });
 }
 
 void InputManager::attachSpecialKeyPressCallback(std::string id, specialKeyPressFuncType func) {
 	logger << "Attached specialKeyPressCallback of id " << id << logger.info;
-	special_key_press_callbacks.emplace(id, func);
+	special_key_press_callbacks.emplace(id, SpecialKeyPressFunc{ true, func });
 };
 
 void InputManager::attachMousePressCallback(std::string id, mousePressFuncType func) {
 	logger << "Attached mousePressCallback of id " << id << logger.info;
-	mouse_press_callbacks.emplace(id, func);
+	mouse_press_callbacks.emplace(id, MousePressFunc{ true, func });
 }
 
 void InputManager::attachMouseMotionCallback(std::string id, mouseMotionFuncType func) {
 	logger << "Attached mouseMotionCallback of id " << id << logger.info;
-	mouse_motion_callbacks.emplace(id, func);
+	mouse_motion_callbacks.emplace(id, MouseMotionFunc{ true, func });
 }
 
 void InputManager::detachKeyPressCallback(std::string id) {
 	logger << "Detached keyPressCallback of id " << id << logger.info;
-	if (iterating)
-		key_press_callbacks_to_erase.push_back(id);
-	else
-		key_press_callbacks.erase(id);
+	if (key_press_callbacks.find(id) != key_press_callbacks.end())
+		key_press_callbacks[id].valid = false;
 }
 
 void InputManager::detachSpecialKeyPressCallback(std::string id) {
 	logger << "Detached specialKeyPressCallback of id " << id << logger.info;
-	if (iterating)
-		special_key_press_callbacks_to_erase.push_back(id);
-	else
-		special_key_press_callbacks.erase(id);
+	if (special_key_press_callbacks.find(id) != special_key_press_callbacks.end())
+		special_key_press_callbacks[id].valid = false;
 }
 
 void InputManager::detachMousePressCallback(std::string id) {
 	logger << "Detached mousePressCallback of id " << id << logger.info;
-	if (iterating)
-		mouse_press_callbacks_to_erase.push_back(id);
-	else
-		mouse_press_callbacks.erase(id);
+	if (mouse_press_callbacks.find(id) != mouse_press_callbacks.end())
+		mouse_press_callbacks[id].valid = false;
 }
 
 
 void InputManager::detachMouseMotionCallback(std::string id) {
 	logger << "Detached mouseMotionCallback of id " << id << logger.info;
-	if (iterating)
-		mouse_motion_callbacks_to_erase.push_back(id);
-	else
-		mouse_motion_callbacks.erase(id);
+	if (mouse_motion_callbacks.find(id) != mouse_motion_callbacks.end())
+		mouse_motion_callbacks[id].valid = false;
 }
 
 void InputManager::checkInit() {

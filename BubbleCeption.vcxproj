@@ -156,6 +156,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Map\Map.cpp" />
     <ClCompile Include="src\Map\Tile\ConveyorTile.cpp" />
+    <ClCompile Include="src\Map\Tile\MinigameTile.cpp" />
     <ClCompile Include="src\Map\Tile\PlatformTile.cpp" />
     <ClCompile Include="src\Map\Tile\SolidTile.cpp" />
     <ClCompile Include="src\Map\Tile\Tile.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="src\Input\InputManager.h" />
     <ClInclude Include="src\Map\Map.h" />
     <ClInclude Include="src\Map\Tile\ConveyorTile.h" />
+    <ClInclude Include="src\Map\Tile\MinigameTile.h" />
     <ClInclude Include="src\Map\Tile\PlatformTile.h" />
     <ClInclude Include="src\Map\Tile\SolidTile.h" />
     <ClInclude Include="src\Map\Tile\Tile.h" />

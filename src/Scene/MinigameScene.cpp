@@ -61,7 +61,23 @@ void MinigameScene::init(IGame& game_interface) {
 	M_Block::block_set[3] = M_Image().setAsset(asset_manager.getImageAsset("m_block03"));
 }
 
-void MinigameScene::clear(IGame& game_interface) {}
+void MinigameScene::clear(IGame& game_interface) {
+	auto& input_manager = game_interface.getIInputManager();
+
+	input_manager.detachKeyPressCallback(
+		"mgs_key"
+	);
+	input_manager.detachSpecialKeyPressCallback(
+		"mgs_spkey"
+	);
+	input_manager.detachMousePressCallback(
+		"mgs_mp"
+	);
+
+	input_manager.detachMouseMotionCallback(
+		"mgs_mm"
+	);
+}
 
 void MinigameScene::idle(IGame& game_interface, float t) {
 	if (clock() - start_t > 1000 / 60) {
@@ -105,6 +121,9 @@ void MinigameScene::idle(IGame& game_interface, float t) {
 			}
 		}
 
+		if (enemyset.empty())
+			finish();
+
 		start_t = clock();
 	}
 }
@@ -139,6 +158,7 @@ void MinigameScene::draw(IGame& game_interface) {
 }
 
 void MinigameScene::keyPressCallback(IInputManager& interface, const InputKeyboard& input) {
+	if (!enabled) return;
 	float a = player.getCenter()[0];
 	float b = player.getCenter()[1];
 	switch (input.key) {
@@ -150,10 +170,14 @@ void MinigameScene::keyPressCallback(IInputManager& interface, const InputKeyboa
 	case 'S': case 's':
 		Bubbles.push_back(player.shootBubble());
 		break;
+	case 27: // ESC
+		finish();
+		break;
 	}
 }
 
 void MinigameScene::specialKeyPressCallback(IInputManager& interface, const InputKeyboardSpecial& input) {
+	if (!enabled) return;
 	switch (input.key) {
 	case GLUT_KEY_RIGHT:
 		if (input.down) {
@@ -195,6 +219,7 @@ void MinigameScene::specialKeyPressCallback(IInputManager& interface, const Inpu
 }
 
 void MinigameScene::mousePressCallback(IInputManager& interface, const InputMouse& input) {
+	if (!enabled) return;
 	if (input.down && input.button == MOUSE_BUTTON::LEFT) {
 		lastX = input.mouse_pos.x;
 		lastY = input.mouse_pos.y;
@@ -214,6 +239,7 @@ void MinigameScene::mousePressCallback(IInputManager& interface, const InputMous
 }
 
 void MinigameScene::mouseMotionCallback(IInputManager& interface, const InputMouseMotion& input) {
+	if (!enabled) return;
 	if (!isScrolling) {
 		int dx, dy;
 		dx = input.mouse_pos.x - lastX;

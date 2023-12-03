@@ -25,6 +25,7 @@ private:
 	IGame* game;
 
 	bool is_jumping = false;
+	bool interaction = false;
 
 	std::unordered_set<Enemy*> enemies;
 	std::unordered_set<Bubble*> bubbles;

@@ -68,6 +68,9 @@ void SceneManager::switchCallback(Scene* self, Scene* other) {
 	*it = other;
 	delete self;
 
+	other->attachSwitchCallback(SceneManager::switchCallback);
+	other->attachAppendCallback(SceneManager::appendCallback);
+	other->attachFinishCallback(SceneManager::finishCallback);
 	other->init(*game_interface);
 }
 
@@ -76,9 +79,11 @@ void SceneManager::appendCallback(Scene* self, Scene* other) {
 
 	auto& stack = instance->scene_stack;
 
-	auto it = std::find(stack.begin(), stack.end(), self);
-	stack.insert(it + 1, other);
+	stack.push_back(other);
 
+	other->attachSwitchCallback(SceneManager::switchCallback);
+	other->attachAppendCallback(SceneManager::appendCallback);
+	other->attachFinishCallback(SceneManager::finishCallback);
 	other->init(*game_interface);
 }
 
@@ -90,6 +95,9 @@ void SceneManager::finishCallback(Scene* self) {
 	self->clear(*game_interface);
 	stack.erase(std::find(stack.begin(), stack.end(), self));
 	delete self;
+
+	if (!stack.empty())
+		stack.back()->enabled = true;
 }
 
 void SceneManager::checkInit() {

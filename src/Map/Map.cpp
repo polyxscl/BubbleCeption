@@ -3,6 +3,7 @@
 #include "Map/Tile/SolidTile.h"
 #include "Map/Tile/PlatformTile.h"
 #include "Map/Tile/ConveyorTile.h"
+#include "Map/Tile/MinigameTile.h"
 
 Logger Map::logger("Map");
 
@@ -17,9 +18,9 @@ Map::~Map() {
 }
 
 void Map::clear() {
-	for (auto& elem : data) {
-		delete elem.second;
-	}
+	//for (auto& elem : data) {
+	//	delete elem.second;
+	//}
 	data.clear();
 }
 

@@ -26,12 +26,10 @@ public:
 	bool visible = true;
 	bool paused = false;
 
-protected:
 	void switchTo(Scene* scene);
 	void append(Scene* scene);
 	void finish();
 
-private:
 	sceneSwitchFuncType switch_callback;
 	sceneFinishFuncType finish_callback;
 	sceneAppendFuncType append_callback;

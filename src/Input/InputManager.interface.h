@@ -11,6 +11,26 @@ typedef std::function<void(IInputManager&, const InputKeyboardSpecial&)> special
 typedef std::function<void(IInputManager&, const InputMouse&)> mousePressFuncType;
 typedef std::function<void(IInputManager&, const InputMouseMotion&)> mouseMotionFuncType;
 
+struct KeyPressFunc {
+	bool valid = true;
+	keyPressFuncType func;
+};
+
+struct SpecialKeyPressFunc {
+	bool valid = true;
+	specialKeyPressFuncType func;
+};
+
+struct MousePressFunc {
+	bool valid = true;
+	mousePressFuncType func;
+};
+
+struct MouseMotionFunc {
+	bool valid = true;
+	mouseMotionFuncType func;
+};
+
 // Interface for InputManager class.
 class IInputManager {
 public:

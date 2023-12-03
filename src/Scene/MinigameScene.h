@@ -26,7 +26,7 @@ using namespace std;
 
 #include "Scene.h"
 
-class MinigameScene : public Scene {
+class MinigameScene : virtual public Scene {
 public:
 	void init(IGame& game_interface) override;
 	void clear(IGame& game_interface) override;

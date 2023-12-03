@@ -36,12 +36,6 @@ public:
 	void detachMousePressCallback(std::string id) override;
 	void detachMouseMotionCallback(std::string id) override;
 
-	// This I can't find a way to make it seamlessly private. How?
-	std::vector<std::string> key_press_callbacks_to_erase;
-	std::vector<std::string> special_key_press_callbacks_to_erase;
-	std::vector<std::string> mouse_press_callbacks_to_erase;
-	std::vector<std::string> mouse_motion_callbacks_to_erase;
-
 private:
 	static InputManager* instance;
 	static void checkInit();
@@ -63,10 +57,10 @@ private:
 
 	bool iterating = false;
 
-	std::unordered_map<std::string, keyPressFuncType> key_press_callbacks;
-	std::unordered_map<std::string, specialKeyPressFuncType> special_key_press_callbacks;
-	std::unordered_map<std::string, mousePressFuncType> mouse_press_callbacks;
-	std::unordered_map<std::string, mouseMotionFuncType> mouse_motion_callbacks;
+	std::unordered_map<std::string, KeyPressFunc> key_press_callbacks;
+	std::unordered_map<std::string, SpecialKeyPressFunc> special_key_press_callbacks;
+	std::unordered_map<std::string, MousePressFunc> mouse_press_callbacks;
+	std::unordered_map<std::string, MouseMotionFunc> mouse_motion_callbacks;
 
 	static Logger logger;
 
