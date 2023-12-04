@@ -1,8 +1,10 @@
 #include <iostream>
 #include "Constants.h"
 #include "GameScene.h"
+#include "MinigameScene.h"
 
 #include "MainmenuScene.h"
+
 
 using namespace std::placeholders;
 
@@ -56,6 +58,9 @@ void MainmenuScene::draw(IGame& game_interface) {
 
 	glRasterPos2f(-1.3f, -1.0f);
 	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*) "Press (S) to start!");
+
+	glRasterPos2f(-2.3f, -2.0f);
+	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*) "Press (M) to start minigame!");
 }
 
 void MainmenuScene::keyPressCallback(IInputManager& interface, const InputKeyboard& input) {
@@ -63,5 +68,9 @@ void MainmenuScene::keyPressCallback(IInputManager& interface, const InputKeyboa
 	if (input.key == 's' && input.down) {
 		this->enabled = false;
 		this->append(new GameScene());
+	}
+	else if (input.key == 'm' && input.down) {
+		this->enabled = true;
+		this->append(new MinigameScene());
 	}
 }

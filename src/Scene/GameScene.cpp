@@ -281,9 +281,6 @@ void GameScene::keyPressCallback(IInputManager& interface, const InputKeyboard& 
 			}
 		}
 		break;
-	case 'm':
-		this->enabled = false;
-		this->append(new MinigameScene());
 	}
 }
 
