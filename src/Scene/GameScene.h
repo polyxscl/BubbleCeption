@@ -27,6 +27,10 @@ private:
 	bool is_jumping = false;
 	bool interaction = false;
 
+	bool end = false;
+
 	std::unordered_set<Enemy*> enemies;
 	std::unordered_set<Bubble*> bubbles;
+
+	int health = 3;
 };

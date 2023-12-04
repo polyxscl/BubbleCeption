@@ -235,22 +235,22 @@ bool InputManager::isShiftPressed() const {
 
 void InputManager::attachKeyPressCallback(std::string id, keyPressFuncType func) {
 	logger << "Attached keyPressCallback of id " << id << logger.info;
-	key_press_callbacks.emplace(id, KeyPressFunc{ true, func });
+	key_press_callbacks.insert_or_assign(id, KeyPressFunc{ true, func });
 }
 
 void InputManager::attachSpecialKeyPressCallback(std::string id, specialKeyPressFuncType func) {
 	logger << "Attached specialKeyPressCallback of id " << id << logger.info;
-	special_key_press_callbacks.emplace(id, SpecialKeyPressFunc{ true, func });
+	special_key_press_callbacks.insert_or_assign(id, SpecialKeyPressFunc{ true, func });
 };
 
 void InputManager::attachMousePressCallback(std::string id, mousePressFuncType func) {
 	logger << "Attached mousePressCallback of id " << id << logger.info;
-	mouse_press_callbacks.emplace(id, MousePressFunc{ true, func });
+	mouse_press_callbacks.insert_or_assign(id, MousePressFunc{ true, func });
 }
 
 void InputManager::attachMouseMotionCallback(std::string id, mouseMotionFuncType func) {
 	logger << "Attached mouseMotionCallback of id " << id << logger.info;
-	mouse_motion_callbacks.emplace(id, MouseMotionFunc{ true, func });
+	mouse_motion_callbacks.insert_or_assign(id, MouseMotionFunc{ true, func });
 }
 
 void InputManager::detachKeyPressCallback(std::string id) {

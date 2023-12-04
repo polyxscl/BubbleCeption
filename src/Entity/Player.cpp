@@ -24,6 +24,12 @@ Player::Player(IGame& game_interface, Map& map)
 
 void Player::idle(float t, Map& map) {
 	is_down = false;
+	if (hit) {
+		hit_time += t;
+		if (hit_time > 3.0f) {
+			hit = false;
+		}
+	}
 
 	if (is_moving_left && is_moving_right) {
 		vel.x = 0.f;
@@ -48,6 +54,7 @@ void Player::idle(float t, Map& map) {
 }
 
 void Player::draw() {
+	if (hit && std::fmod(hit_time * 4, 2) < 1.0f) return;
 	Entity2D::draw();
 }
 
@@ -109,4 +116,13 @@ Bubble* Player::shootBubble(IGame& game_interface, Map& map) {
 	}
 
 	return bubble;
+}
+
+void Player::doHit() {
+	hit = true;
+	hit_time = 0.0f;
+}
+
+bool Player::isHit() {
+	return hit;
 }
