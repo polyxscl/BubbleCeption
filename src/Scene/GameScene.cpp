@@ -1,14 +1,16 @@
 #include <deque>
 #include <random>
-
 #include "Constants.h"
 #include "GameScene.h"
+
 
 #include "Map/Tile/SolidTile.h"
 #include "Map/Tile/PlatformTile.h",
 
 #include "MinigameScene.h"
 #include "GameoverScene.h"
+
+Logger GameScene::logger("GameScene");
 
 using namespace std::placeholders;
 
@@ -61,7 +63,8 @@ void GameScene::init(IGame& game_interface) {
 
 	game = &game_interface;
 
-	health = 3;
+	max_health = 4;
+	health = 4;
 }
 
 void GameScene::clear(IGame& game_interface) {
@@ -130,6 +133,7 @@ void GameScene::idle(IGame& game_interface, float t) {
 
 		if (enemy->getWorldHitbox().intersects(player->getWorldHitbox()) && !player->isHit() && !enemy->captured) {
 			player->doHit();
+			score /= 2;
 			health--;
 		}
 
@@ -159,6 +163,8 @@ void GameScene::idle(IGame& game_interface, float t) {
 			std::deque<Bubble*> dq;
 			dq.push_back(b1);
 
+			auto count = 0;
+			auto mul = 1;
 			while (!dq.empty()) {
 				auto b2 = dq.front();
 				dq.pop_front();
@@ -168,10 +174,15 @@ void GameScene::idle(IGame& game_interface, float t) {
 						dq.push_back(b3);
 					}
 				}
+				count++;
+				if (b2->hasEnemy()) {
+					mul++;
+				}
 				b2->killCaptured();
 				b2->alive = false;
 				visited.insert(b2);
 			}
+			score += count * 100 * mul;
 		}
 	}
 
@@ -180,6 +191,42 @@ void GameScene::idle(IGame& game_interface, float t) {
 		this->end = true;
 		append(new GameoverScene());
 	}
+
+	auto& asset_manager = game->getIAssetManager();
+
+	if (enemies.empty()) {
+		stage++;
+		logger << "Stage " << stage << logger.info;
+		delete map;
+		map = new Map();
+		map->loadFromMapAsset(game_interface, asset_manager.getMapAsset("level2"));
+
+		if (stage == 2) {
+			for (int i = 0; i < 3; ++i) {
+				auto enemy = new Enemy(game_interface, *map);
+				enemy->pos = Vector3<int>(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f);
+				enemy->speed = dist(gen);
+				enemies.emplace(enemy);
+			}
+
+			for (int i = 0; i < 3; ++i) {
+				auto enemy = new Enemy(game_interface, *map);
+				enemy->pos = Vector3<int>(SCREEN_WIDTH / 2 - 5.0f, 2.0f, 0.0f);
+				enemy->speed = dist(gen);
+				enemies.emplace(enemy);
+			}
+
+			for (int i = 0; i < 3; ++i) {
+				auto enemy = new Enemy(game_interface, *map);
+				enemy->pos = Vector3<int>(SCREEN_WIDTH / 2 + 5.0f, 2.0f, 0.0f);
+				enemy->speed = dist(gen);
+				enemies.emplace(enemy);
+			}
+		}
+	}
+
+	score = std::max(0, score);
+	score_display += ((float) score - score_display) / 64.f;
 }
 
 void GameScene::draw(IGame& game_interface) {
@@ -231,7 +278,7 @@ void GameScene::draw(IGame& game_interface) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-	for (int i = 0; i < 3; ++i) {
+	for (int i = 0; i < max_health; ++i) {
 		glEnable(GL_TEXTURE_2D);
 		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 		glBindTexture(GL_TEXTURE_2D, asset_manager.getImageAsset(i < health ? "heart" : "heart_broken")->getTextureID());
@@ -242,6 +289,31 @@ void GameScene::draw(IGame& game_interface) {
 		glTexCoord2f(1.0f, 0.0f); glVertex2f(0.5f + i, -0.5f);
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
+	}
+	glEnable(GL_TEXTURE_2D);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glBindTexture(GL_TEXTURE_2D, asset_manager.getImageAsset("score")->getTextureID());
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f); glVertex2f(-0.25f, -1.25f + SCREEN_HEIGHT);
+	glTexCoord2f(0.0f, 1.0f); glVertex2f(-0.25f, -0.75f + SCREEN_HEIGHT);
+	glTexCoord2f(1.0f, 1.0f); glVertex2f(2.25f, -0.75f + SCREEN_HEIGHT);
+	glTexCoord2f(1.0f, 0.0f); glVertex2f(2.25f, -1.25f + SCREEN_HEIGHT);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+	int score_temp = std::lround(score_display);
+	for (int i = 0; i < 8; ++i) {
+		auto j = 7 - i;
+		glEnable(GL_TEXTURE_2D);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glBindTexture(GL_TEXTURE_2D, asset_manager.getImageAsset("number_" + to_string(score_temp % 10))->getTextureID());
+		glBegin(GL_QUADS);
+		glTexCoord2f(0.0f, 0.0f); glVertex2f(-0.25f + j / 2.f, -1.75f + SCREEN_HEIGHT);
+		glTexCoord2f(0.0f, 1.0f); glVertex2f(-0.25f + j / 2.f, -1.25f + SCREEN_HEIGHT);
+		glTexCoord2f(1.0f, 1.0f); glVertex2f(0.25f + j / 2.f, -1.25f + SCREEN_HEIGHT);
+		glTexCoord2f(1.0f, 0.0f); glVertex2f(0.25f + j / 2.f, -1.75f + SCREEN_HEIGHT);
+		glEnd();
+		glDisable(GL_TEXTURE_2D);
+		score_temp /= 10;
 	}
 	glDisable(GL_BLEND);
 }

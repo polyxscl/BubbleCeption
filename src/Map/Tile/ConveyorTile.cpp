@@ -2,7 +2,7 @@
 
 #include "Entity/EntityPhysics.h"
 
-void ConveyorTile::init(IGame& game_interface) {
+void ConveyorTile::init(IGame& game_interface, std::string palette) {
 	auto& asset_manager = game_interface.getIAssetManager();
 	if (direction == Direction::LEFT)
 		texture = asset_manager.getImageAsset("conveyor_left");
@@ -22,6 +22,7 @@ void ConveyorTile::idle(float t) {
 
 bool ConveyorTile::isCollision(IEntityPhysics* ep) const {
 	if (!collidable) return false;
+	if (!ep->should_collide) return false;
 
 	return ep->getWorldHitbox().intersects(getWorldHitbox());
 }

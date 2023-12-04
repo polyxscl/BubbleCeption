@@ -1,8 +1,8 @@
 #include "PlatformTile.h"
 
-void PlatformTile::init(IGame& game_interface) {
+void PlatformTile::init(IGame& game_interface, std::string palette) {
 	auto& asset_manager = game_interface.getIAssetManager();
-	texture = asset_manager.getImageAsset("platform_1");
+	texture = asset_manager.getImageAsset("platform_" + palette);
 
 	hitbox = Rect<float>(Vector2<float>(-0.5f, 0.2f), Vector2<float>(0.5f, 0.5f));
 }
@@ -23,6 +23,7 @@ bool PlatformTile::isCollision(IEntityPhysics* ep) const {
 
 void PlatformTile::onCollision(IEntityPhysics* ep) {
 	if (!collidable) return;
+	if (!ep->should_collide) return;
 
 	int selection = 0;
 

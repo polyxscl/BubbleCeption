@@ -2,6 +2,8 @@
 #include <ctime>
 #include <random>
 
+#include "Constants.h"
+
 #include "Enemy.h"
 
 #define PI 3.1415926535897932384626433832795028841971693993751058209749445923
@@ -19,6 +21,8 @@ Enemy::Enemy(IGame& game_interface, Map& map)
 	accel = Vector3<float>(0.0f, -20.0f);
 	hitbox = Rect<float>(Vector2<float>(-0.5f, -0.5f), Vector2<float>(0.5f, 0.5f));
 
+	should_collide = true;
+
 	auto& asset_manager = game_interface.getIAssetManager();
 	texture = asset_manager.getImageAsset("enemy");
 }
@@ -26,12 +30,20 @@ Enemy::Enemy(IGame& game_interface, Map& map)
 void Enemy::idle(float t, Map& map) {
 	alive_time += t;
 
+	if (pos.y + size.y / 2.f > SCREEN_HEIGHT - 0.5f) {
+		pos.y = -0.5f + size.y / 2.f;
+	}
+	else if (pos.y - size.y / 2.f < -0.5f) {
+		pos.y = SCREEN_HEIGHT - size.y / 2.f;
+	}
 	if (captured) {
 		rotation = std::fmod(alive_time, 1.0f) * 2 * PI;
+		should_collide = false;
 		return;
 	}
 	else {
 		rotation = 0.0f;
+		should_collide = true;
 	}
 
 	if (direction == Direction::LEFT) {
@@ -57,8 +69,7 @@ void Enemy::idle(float t, Map& map) {
 	if (dist(gen) > 0.998f)
 		vel.y = 20.f;
 
-	if (!captured)
-		EntityPhysics::idle(t, map);
+	EntityPhysics::idle(t, map);
 }
 
 void Enemy::draw() {

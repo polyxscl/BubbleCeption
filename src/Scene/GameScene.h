@@ -32,5 +32,12 @@ private:
 	std::unordered_set<Enemy*> enemies;
 	std::unordered_set<Bubble*> bubbles;
 
-	int health = 3;
+	int health = 4;
+	int max_health = 4;
+	int score = 0;
+	float score_display = 0;
+
+	int stage = 1;
+
+	static Logger logger;
 };

@@ -6,7 +6,7 @@ class SolidTile : virtual public Tile {
 public:
 	using Tile::Tile;
 
-	virtual void init(IGame& game_interface) override;
+	virtual void init(IGame& game_interface, std::string palette) override;
 	virtual void clear(IGame& game_interface) override;
 	virtual void idle(float t) override;
 

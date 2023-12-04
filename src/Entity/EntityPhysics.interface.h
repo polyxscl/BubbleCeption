@@ -10,5 +10,7 @@ public:
 	Vector3<float> vel, accel;
 	Rect<float> hitbox;
 
+	bool should_collide = true;
+
 	virtual Rect<float> getWorldHitbox() const = 0;
 };

@@ -30,7 +30,7 @@ void Bubble::idle(float t, Map& map) {
 	auto new_size_val = std::min(time, 0.5f) * 1.1f;
 	if (!fully_blown) {
 		sphere_model->size = Vector3<float>(new_size_val, new_size_val, new_size_val);
-		
+
 		if (time > 0.5f)
 			fully_blown = true;
 	}
@@ -38,10 +38,22 @@ void Bubble::idle(float t, Map& map) {
 
 	EntityPhysics::idle(t, map);
 
-	if (pos.y < -new_size_val)
-		pos.y += SCREEN_HEIGHT + new_size_val;
-	if (pos.y > SCREEN_HEIGHT)
-		pos.y -= SCREEN_HEIGHT + new_size_val;
+	if (pos.y + new_size_val > SCREEN_HEIGHT - 0.5f) {
+		vel.y *= -1;
+		pos.y = SCREEN_HEIGHT - new_size_val - 0.5f;
+	}
+	else if (pos.y - new_size_val < -0.5f) {
+		vel.y *= -1;
+		pos.y = new_size_val;
+	}
+	else if (pos.x + new_size_val > SCREEN_WIDTH - 0.5f) {
+		vel.x *= -1;
+		pos.x = SCREEN_WIDTH - new_size_val - 0.5f;
+	}
+	else if (pos.x - new_size_val < -0.5f) {
+		vel.x *= -1;
+		pos.x = new_size_val - 0.5f;
+	}
 
 	if (direction == Direction::LEFT && vel.x > terminal_vel.x) {
 		vel.x = terminal_vel.x;

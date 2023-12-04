@@ -30,6 +30,8 @@ private:
 
 	std::unordered_map<Vector3<int>, Tile*> data;
 
+	std::string palette;
+
 	static Logger logger;
 
 };

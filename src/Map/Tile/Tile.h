@@ -10,7 +10,7 @@ public:
 	explicit Tile(Vector3<int> pos)
 		: pos(pos), collidable(true), visible(true) {}
 
-	virtual void init(IGame& game_interface) {};
+	virtual void init(IGame& game_interface, std::string palette) {};
 	virtual void clear(IGame& game_interface) {};
 	virtual void draw(const Camera& camera);
 	virtual void idle(float t) {};

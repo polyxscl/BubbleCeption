@@ -18,6 +18,8 @@ Player::Player(IGame& game_interface, Map& map)
 	accel = Vector3<float>(0.0f, -20.0f);
 	hitbox = Rect<float>(Vector2<float>(-0.5f, -0.5f), Vector2<float>(0.5f, 0.5f));
 
+	should_collide = true;
+
 	auto& asset_manager = game_interface.getIAssetManager();
 	texture = asset_manager.getImageAsset("player");
 }

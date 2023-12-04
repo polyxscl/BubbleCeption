@@ -3,7 +3,6 @@
 #include "Map/Tile/SolidTile.h"
 #include "Map/Tile/PlatformTile.h"
 #include "Map/Tile/ConveyorTile.h"
-#include "Map/Tile/MinigameTile.h"
 
 Logger Map::logger("Map");
 
@@ -27,7 +26,7 @@ void Map::clear() {
 void Map::loadFromMapAsset(IGame& game_interface, std::shared_ptr<MapAsset> map_asset) {
 	clear();
 	auto& asset_data = map_asset->getData();
-	auto palette = map_asset->getPalette();
+	palette = map_asset->getPalette();
 
 	for (auto& [pos, id] : asset_data) {
 		if (!id.compare("SOLID"))
@@ -66,7 +65,7 @@ void Map::handleCollision(IEntityPhysics* ep) {
 }
 
 void Map::setTile(IGame& game_interface, Tile* tile) {
-	tile->init(game_interface);
+	tile->init(game_interface, palette);
 	data[tile->pos] = tile;
 }
 
