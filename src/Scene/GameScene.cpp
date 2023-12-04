@@ -2,7 +2,7 @@
 #include <random>
 #include "Constants.h"
 #include "GameScene.h"
-
+#include "VictoryScene.h"
 
 #include "Map/Tile/SolidTile.h"
 #include "Map/Tile/PlatformTile.h",
@@ -17,6 +17,8 @@ using namespace std::placeholders;
 static std::random_device rd;
 static std::mt19937 gen(rd());
 static std::uniform_real_distribution<float> dist(3.f, 10.f);
+
+int high_score = 0;
 
 void GameScene::init(IGame& game_interface) {
 	auto& input_manager = game_interface.getIInputManager();
@@ -74,6 +76,8 @@ void GameScene::clear(IGame& game_interface) {
 	auto& input_manager = game_interface.getIInputManager();
 	input_manager.detachSpecialKeyPressCallback("gs_spkey");
 	input_manager.detachKeyPressCallback("gs_key");
+
+	high_score = std::max(score, high_score);
 
 	for (auto& enemy : enemies) {
 		if (enemy != nullptr) {
@@ -223,6 +227,11 @@ void GameScene::idle(IGame& game_interface, float t) {
 				enemy->speed = dist(gen);
 				enemies.emplace(enemy);
 			}
+		}
+		else {
+			end = true;
+			this->paused = true;
+			append(new VictoryScene());
 		}
 
 		hasHit = true;

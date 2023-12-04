@@ -183,6 +183,7 @@
     <ClCompile Include="src\Scene\MinigameScene.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
     <ClCompile Include="src\Scene\SceneManager.cpp" />
+    <ClCompile Include="src\Scene\VictoryScene.cpp" />
     <ClCompile Include="src\Util\Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +239,7 @@
     <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Scene\SceneManager.h" />
     <ClInclude Include="src\Scene\SceneManager.interface.h" />
+    <ClInclude Include="src\Scene\VictoryScene.h" />
     <ClInclude Include="src\Util\Direction.h" />
     <ClInclude Include="src\Util\Logger.h" />
     <ClInclude Include="src\Util\Rect.h" />

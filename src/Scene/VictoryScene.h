@@ -6,7 +6,7 @@
 #include "Scene/Scene.h"
 #include "Asset/ImageAsset.h"
 
-class MainmenuScene : public Scene {
+class VictoryScene : public Scene {
 public:
 	void init(IGame& game_interface) override;
 	void clear(IGame& game_interface) override;
@@ -14,7 +14,9 @@ public:
 	void draw(IGame& game_interface) override;
 
 	void keyPressCallback(IInputManager& interface, const InputKeyboard& input);
-	
-	std::shared_ptr<ImageAsset> texture;
 
+private:
+	std::shared_ptr<ImageAsset> texture;
+	float progress;
+	float elapsed;
 };
