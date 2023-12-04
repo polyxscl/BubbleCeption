@@ -37,6 +37,8 @@ private:
 	int score = 0;
 	float score_display = 0;
 
+	bool hasHit = false;
+
 	int stage = 1;
 
 	static Logger logger;

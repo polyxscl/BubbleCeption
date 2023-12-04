@@ -158,6 +158,7 @@
     <ClCompile Include="src\Map\Tile\ConveyorTile.cpp" />
     <ClCompile Include="src\Map\Tile\PlatformTile.cpp" />
     <ClCompile Include="src\Map\Tile\SolidTile.cpp" />
+    <ClCompile Include="src\Map\Tile\SpikeTile.cpp" />
     <ClCompile Include="src\Map\Tile\Tile.cpp" />
     <ClCompile Include="src\Minigame\M_BasicCollision.cpp" />
     <ClCompile Include="src\Minigame\M_Block.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="src\Map\Tile\ConveyorTile.h" />
     <ClInclude Include="src\Map\Tile\PlatformTile.h" />
     <ClInclude Include="src\Map\Tile\SolidTile.h" />
+    <ClInclude Include="src\Map\Tile\SpikeTile.h" />
     <ClInclude Include="src\Map\Tile\Tile.h" />
     <ClInclude Include="src\Minigame\M_BasicCollision.h" />
     <ClInclude Include="src\Minigame\M_Block.h" />

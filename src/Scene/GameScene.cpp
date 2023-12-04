@@ -65,6 +65,9 @@ void GameScene::init(IGame& game_interface) {
 
 	max_health = 4;
 	health = 4;
+
+	hasHit = true;
+	player->doHit();
 }
 
 void GameScene::clear(IGame& game_interface) {
@@ -133,8 +136,6 @@ void GameScene::idle(IGame& game_interface, float t) {
 
 		if (enemy->getWorldHitbox().intersects(player->getWorldHitbox()) && !player->isHit() && !enemy->captured) {
 			player->doHit();
-			score /= 2;
-			health--;
 		}
 
 		if (!enemy->alive) {
@@ -223,10 +224,22 @@ void GameScene::idle(IGame& game_interface, float t) {
 				enemies.emplace(enemy);
 			}
 		}
+
+		hasHit = true;
+		player->doHit();
 	}
 
 	score = std::max(0, score);
 	score_display += ((float) score - score_display) / 64.f;
+
+	if (!hasHit && player->isHit()) {
+		hasHit = true;
+		score /= 2;
+		health--;
+	}
+	else if (!player->isHit()) {
+		hasHit = false;
+	}
 }
 
 void GameScene::draw(IGame& game_interface) {

@@ -165,19 +165,19 @@
         },
 		    {
             "id": "PLATFORM",
-            "pos": [1, 6]
+            "pos": [1, 5]
 		    },
 		    {
             "id": "PLATFORM",
-            "pos": [2, 6]
+            "pos": [2, 5]
 		    },
 		    {
             "id": "PLATFORM",
-            "pos": [18, 6]
+            "pos": [18, 5]
 		    },
 		    {
             "id": "PLATFORM",
-            "pos": [17, 6]
+            "pos": [17, 5]
 		    },
         {
             "id": "PLATFORM",
@@ -218,12 +218,22 @@
         {
             "id": "PLATFORM",
             "pos": [14, 9]
-        }
-    ],
-    "enemy_data": [
+        },
         {
-            "id": "ENEMY",
-            "pos": [3.0, 3.0]
+            "id": "SPIKE",
+            "pos": [18, 6]
+        },
+        {
+            "id": "SPIKE",
+            "pos": [17, 6]
+        },
+        {
+            "id": "SPIKE",
+            "pos": [1, 6]
+        },
+        {
+            "id": "SPIKE",
+            "pos": [2, 6]
         }
     ]
 }

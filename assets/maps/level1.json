@@ -347,11 +347,5 @@
             "id": "PLATFORM",
             "pos": [14, 9]
         }
-    ],
-    "enemy_data": [
-        {
-            "id": "ENEMY",
-            "pos": [3.0, 3.0]
-        }
     ]
 }

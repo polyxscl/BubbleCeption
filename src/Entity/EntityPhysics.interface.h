@@ -13,4 +13,6 @@ public:
 	bool should_collide = true;
 
 	virtual Rect<float> getWorldHitbox() const = 0;
+	virtual void doHit() {}
+	virtual bool isHit() { return false;  }
 };

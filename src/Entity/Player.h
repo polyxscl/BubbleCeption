@@ -24,8 +24,8 @@ public:
 
 	Bubble* shootBubble(IGame& game_interface, Map& map);
 
-	void doHit();
-	bool isHit();
+	virtual void doHit() override;
+	virtual bool isHit() override;
 
 private:
 	Direction direction = Direction::LEFT;

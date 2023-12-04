@@ -3,6 +3,7 @@
 #include "Map/Tile/SolidTile.h"
 #include "Map/Tile/PlatformTile.h"
 #include "Map/Tile/ConveyorTile.h"
+#include "Map/Tile/SpikeTile.h"
 
 Logger Map::logger("Map");
 
@@ -42,6 +43,10 @@ void Map::loadFromMapAsset(IGame& game_interface, std::shared_ptr<MapAsset> map_
 			auto conveyor_tile = new ConveyorTile(pos);
 			conveyor_tile->direction = Direction::RIGHT;
 			setTile(game_interface, conveyor_tile);
+		}
+		else if (!id.compare("SPIKE")) {
+			auto spike_tile = new SpikeTile(pos);
+			setTile(game_interface, spike_tile);
 		}
 		else {
 			logger << "Invalid tile id of " << id << logger.error;
