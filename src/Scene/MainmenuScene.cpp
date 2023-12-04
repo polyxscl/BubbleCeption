@@ -70,7 +70,7 @@ void MainmenuScene::keyPressCallback(IInputManager& interface, const InputKeyboa
 		this->append(new GameScene());
 	}
 	else if (input.key == 'm' && input.down) {
-		this->enabled = true;
+		this->enabled = false;
 		this->append(new MinigameScene());
 	}
 }
